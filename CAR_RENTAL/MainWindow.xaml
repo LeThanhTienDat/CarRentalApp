@@ -1,0 +1,44 @@
+﻿<Window x:Class="CAR_RENTAL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CAR_RENTAL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1500"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Admin" x:Name="AdminMenu">
+                    <MenuItem Header="Profile" Click="Admin_Profile_Click"/>
+                    <MenuItem Header="Manage Cars" Click="Car_Click"/>
+                    <MenuItem Header="Manage Category" Click="Category_Click"/>
+                    <MenuItem Header="Manage Customer" Click="Customer_Click"/>
+                    <MenuItem Header="Manage Booking" Click="Booking_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Logout" Click="Logout"/>
+                </MenuItem>
+
+                <MenuItem Header="Customer" x:Name="CustomerMenu">
+                    <MenuItem Header="Profile"/>
+                    <MenuItem Header="Booking"/>
+                    <Separator/>
+                    <MenuItem Header="Logout" Click="Logout"/>
+                </MenuItem>
+
+                <MenuItem Header="Report" x:Name="ReportMenu">
+                    <MenuItem Header="Bookings" Click="BookingReport_Click"/>
+                    <MenuItem Header="Cars" Click="CarReport_Click"/>
+                    <MenuItem Header="Categories"/>
+                    <MenuItem Header="Customers"/>
+                </MenuItem>
+            </Menu>
+
+            <ContentControl x:Name="MainContent">
+
+            </ContentControl>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAR_RENTALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbl_Admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+    <Property Name="active" Type="int" />
+    <Property Name="salt" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tbl_Booking">
+    <Key>
+      <PropertyRef Name="booking_id" />
+    </Key>
+    <Property Name="booking_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cus_id" Type="int" />
+    <Property Name="booking_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="discount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="deposit" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="payment_type_id" Type="int" />
+    <Property Name="total_price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="order_date" Type="date" />
+    <Property Name="paid" Type="int" />
+    <Property Name="deposit_cash" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="deposit_cash_has_paid" Type="int" />
+    <Property Name="payment_confirm" Type="int" />
+    <Property Name="is_cancel" Type="int" />
+    <Property Name="reason_cancel" Type="nvarchar" MaxLength="200" />
+    <Property Name="complete_date" Type="date" />
+  </EntityType>
+  <EntityType Name="tbl_Booking_details">
+    <Key>
+      <PropertyRef Name="booking_details_id" />
+    </Key>
+    <Property Name="booking_details_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="booking_id" Type="int" />
+    <Property Name="car_id" Type="int" />
+    <Property Name="booking_details_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="booking_date" Type="date" />
+    <Property Name="start_date" Type="date" />
+    <Property Name="end_date" Type="date" />
+    <Property Name="actual_return_date" Type="date" />
+    <Property Name="price_per_car" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="fine" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="refund" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="status_return" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Car">
+    <Key>
+      <PropertyRef Name="car_id" />
+    </Key>
+    <Property Name="car_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cate_id" Type="int" />
+    <Property Name="brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="model" Type="nvarchar" MaxLength="50" />
+    <Property Name="price_per_day" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="car_status" Type="nvarchar" MaxLength="50" />
+    <Property Name="image" Type="nvarchar" MaxLength="200" />
+    <Property Name="license_plate" Type="nvarchar" MaxLength="50" />
+    <Property Name="seat_count" Type="int" />
+    <Property Name="color" Type="nvarchar" MaxLength="20" />
+    <Property Name="car_type_id" Type="int" />
+    <Property Name="active" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Car_type">
+    <Key>
+      <PropertyRef Name="car_type_id" />
+    </Key>
+    <Property Name="car_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="car_type_name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_Category">
+    <Key>
+      <PropertyRef Name="cate_id" />
+    </Key>
+    <Property Name="cate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" />
+    <Property Name="description" Type="text" />
+    <Property Name="active" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_City">
+    <Key>
+      <PropertyRef Name="city_id" />
+    </Key>
+    <Property Name="city_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city_name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_Customer">
+    <Key>
+      <PropertyRef Name="cus_id" />
+    </Key>
+    <Property Name="cus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" />
+    <Property Name="phone" Type="varchar" MaxLength="15" />
+    <Property Name="address" Type="nvarchar" MaxLength="150" />
+    <Property Name="city_id" Type="int" />
+    <Property Name="active" Type="int" />
+    <Property Name="cus_id_card" Type="varchar" MaxLength="20" />
+    <Property Name="create_date" Type="date" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="district_id" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_District">
+    <Key>
+      <PropertyRef Name="district_id" />
+    </Key>
+    <Property Name="district_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="district_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="city_id" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Payment_type">
+    <Key>
+      <PropertyRef Name="payment_type_id" />
+    </Key>
+    <Property Name="payment_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="fk_Booking_Customer_cus_id">
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+    <End Role="tbl_Booking" Type="Self.tbl_Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="cus_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking">
+        <PropertyRef Name="cus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Booking_details_Booking_booking_id">
+    <End Role="tbl_Booking" Type="Self.tbl_Booking" Multiplicity="0..1" />
+    <End Role="tbl_Booking_details" Type="Self.tbl_Booking_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Booking">
+        <PropertyRef Name="booking_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking_details">
+        <PropertyRef Name="booking_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Booking_details_Car_car_id">
+    <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="0..1" />
+    <End Role="tbl_Booking_details" Type="Self.tbl_Booking_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Car">
+        <PropertyRef Name="car_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking_details">
+        <PropertyRef Name="car_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Booking_Payment_type_payment_type_id">
+    <End Role="tbl_Payment_type" Type="Self.tbl_Payment_type" Multiplicity="0..1" />
+    <End Role="tbl_Booking" Type="Self.tbl_Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Payment_type">
+        <PropertyRef Name="payment_type_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking">
+        <PropertyRef Name="payment_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Car_Car_type_car_type_id">
+    <End Role="tbl_Car_type" Type="Self.tbl_Car_type" Multiplicity="0..1" />
+    <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Car_type">
+        <PropertyRef Name="car_type_id" />
+      </Principal>
+      <Dependent Role="tbl_Car">
+        <PropertyRef Name="car_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Car_Category_cate_id">
+    <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+    <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Category">
+        <PropertyRef Name="cate_id" />
+      </Principal>
+      <Dependent Role="tbl_Car">
+        <PropertyRef Name="cate_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Customer_City_city_id">
+    <End Role="tbl_City" Type="Self.tbl_City" Multiplicity="0..1" />
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_City">
+        <PropertyRef Name="city_id" />
+      </Principal>
+      <Dependent Role="tbl_Customer">
+        <PropertyRef Name="city_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Customer_District_district_id">
+    <End Role="tbl_District" Type="Self.tbl_District" Multiplicity="0..1" />
+    <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_District">
+        <PropertyRef Name="district_id" />
+      </Principal>
+      <Dependent Role="tbl_Customer">
+        <PropertyRef Name="district_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CAR_RENTALModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Booking" EntityType="Self.tbl_Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Booking_details" EntityType="Self.tbl_Booking_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Car" EntityType="Self.tbl_Car" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Car_type" EntityType="Self.tbl_Car_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_City" EntityType="Self.tbl_City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_District" EntityType="Self.tbl_District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Payment_type" EntityType="Self.tbl_Payment_type" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Booking_Customer_cus_id" Association="Self.fk_Booking_Customer_cus_id">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_Booking" EntitySet="tbl_Booking" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Booking_details_Booking_booking_id" Association="Self.fk_Booking_details_Booking_booking_id">
+      <End Role="tbl_Booking" EntitySet="tbl_Booking" />
+      <End Role="tbl_Booking_details" EntitySet="tbl_Booking_details" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Booking_details_Car_car_id" Association="Self.fk_Booking_details_Car_car_id">
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+      <End Role="tbl_Booking_details" EntitySet="tbl_Booking_details" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Booking_Payment_type_payment_type_id" Association="Self.fk_Booking_Payment_type_payment_type_id">
+      <End Role="tbl_Payment_type" EntitySet="tbl_Payment_type" />
+      <End Role="tbl_Booking" EntitySet="tbl_Booking" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Car_Car_type_car_type_id" Association="Self.fk_Car_Car_type_car_type_id">
+      <End Role="tbl_Car_type" EntitySet="tbl_Car_type" />
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Car_Category_cate_id" Association="Self.fk_Car_Category_cate_id">
+      <End Role="tbl_Category" EntitySet="tbl_Category" />
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Customer_City_city_id" Association="Self.fk_Customer_City_city_id">
+      <End Role="tbl_City" EntitySet="tbl_City" />
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Customer_District_district_id" Association="Self.fk_Customer_District_district_id">
+      <End Role="tbl_District" EntitySet="tbl_District" />
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

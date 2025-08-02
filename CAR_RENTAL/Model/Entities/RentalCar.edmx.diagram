@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0c60208cdd044a7c9799cd6572ad55ac" Name="Diagram1">
+        <EntityTypeShape EntityType="CAR_RENTALModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Admin" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Booking" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Booking_details" Width="2" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Car" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Car_type" Width="1.5" PointX="3" PointY="11.25" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Category" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_City" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Customer" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_District" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Payment_type" Width="1.5" PointX="3" PointY="6.125" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Booking_Customer_cus_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Booking_details_Booking_booking_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Booking_Payment_type_payment_type_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Booking_details_Car_car_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Car_Car_type_car_type_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Car_Category_cate_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Customer_City_city_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_Customer_District_district_id" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

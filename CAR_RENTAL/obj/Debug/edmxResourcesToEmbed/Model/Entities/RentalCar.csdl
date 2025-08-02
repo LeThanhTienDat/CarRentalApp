@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAR_RENTALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DbCarRental" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="CAR_RENTALModel.sysdiagram" />
+    <EntitySet Name="tbl_Admin" EntityType="CAR_RENTALModel.tbl_Admin" />
+    <EntitySet Name="tbl_Booking" EntityType="CAR_RENTALModel.tbl_Booking" />
+    <EntitySet Name="tbl_Booking_details" EntityType="CAR_RENTALModel.tbl_Booking_details" />
+    <EntitySet Name="tbl_Car" EntityType="CAR_RENTALModel.tbl_Car" />
+    <EntitySet Name="tbl_Car_type" EntityType="CAR_RENTALModel.tbl_Car_type" />
+    <EntitySet Name="tbl_Category" EntityType="CAR_RENTALModel.tbl_Category" />
+    <EntitySet Name="tbl_City" EntityType="CAR_RENTALModel.tbl_City" />
+    <EntitySet Name="tbl_Customer" EntityType="CAR_RENTALModel.tbl_Customer" />
+    <EntitySet Name="tbl_District" EntityType="CAR_RENTALModel.tbl_District" />
+    <EntitySet Name="tbl_Payment_type" EntityType="CAR_RENTALModel.tbl_Payment_type" />
+    <AssociationSet Name="fk_Booking_Customer_cus_id" Association="CAR_RENTALModel.fk_Booking_Customer_cus_id">
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+      <End Role="tbl_Booking" EntitySet="tbl_Booking" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Booking_details_Booking_booking_id" Association="CAR_RENTALModel.fk_Booking_details_Booking_booking_id">
+      <End Role="tbl_Booking" EntitySet="tbl_Booking" />
+      <End Role="tbl_Booking_details" EntitySet="tbl_Booking_details" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Booking_Payment_type_payment_type_id" Association="CAR_RENTALModel.fk_Booking_Payment_type_payment_type_id">
+      <End Role="tbl_Payment_type" EntitySet="tbl_Payment_type" />
+      <End Role="tbl_Booking" EntitySet="tbl_Booking" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Booking_details_Car_car_id" Association="CAR_RENTALModel.fk_Booking_details_Car_car_id">
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+      <End Role="tbl_Booking_details" EntitySet="tbl_Booking_details" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Car_Car_type_car_type_id" Association="CAR_RENTALModel.fk_Car_Car_type_car_type_id">
+      <End Role="tbl_Car_type" EntitySet="tbl_Car_type" />
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Car_Category_cate_id" Association="CAR_RENTALModel.fk_Car_Category_cate_id">
+      <End Role="tbl_Category" EntitySet="tbl_Category" />
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Customer_City_city_id" Association="CAR_RENTALModel.fk_Customer_City_city_id">
+      <End Role="tbl_City" EntitySet="tbl_City" />
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Customer_District_district_id" Association="CAR_RENTALModel.fk_Customer_District_district_id">
+      <End Role="tbl_District" EntitySet="tbl_District" />
+      <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_Admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="salt" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_Booking">
+    <Key>
+      <PropertyRef Name="booking_id" />
+    </Key>
+    <Property Name="booking_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cus_id" Type="Int32" />
+    <Property Name="booking_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="discount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="deposit" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="payment_type_id" Type="Int32" />
+    <Property Name="total_price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tbl_Customer" Relationship="CAR_RENTALModel.fk_Booking_Customer_cus_id" FromRole="tbl_Booking" ToRole="tbl_Customer" />
+    <NavigationProperty Name="tbl_Booking_details" Relationship="CAR_RENTALModel.fk_Booking_details_Booking_booking_id" FromRole="tbl_Booking" ToRole="tbl_Booking_details" />
+    <NavigationProperty Name="tbl_Payment_type" Relationship="CAR_RENTALModel.fk_Booking_Payment_type_payment_type_id" FromRole="tbl_Booking" ToRole="tbl_Payment_type" />
+    <Property Name="order_date" Type="DateTime" Precision="0" />
+    <Property Name="paid" Type="Int32" />
+    <Property Name="deposit_cash" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="deposit_cash_has_paid" Type="Int32" />
+    <Property Name="payment_confirm" Type="Int32" />
+    <Property Name="is_cancel" Type="Int32" />
+    <Property Name="reason_cancel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="complete_date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tbl_Booking_details">
+    <Key>
+      <PropertyRef Name="booking_details_id" />
+    </Key>
+    <Property Name="booking_details_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="booking_id" Type="Int32" />
+    <Property Name="car_id" Type="Int32" />
+    <Property Name="booking_details_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="booking_date" Type="DateTime" Precision="0" />
+    <Property Name="start_date" Type="DateTime" Precision="0" />
+    <Property Name="end_date" Type="DateTime" Precision="0" />
+    <Property Name="actual_return_date" Type="DateTime" Precision="0" />
+    <Property Name="price_per_car" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="fine" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="refund" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tbl_Booking" Relationship="CAR_RENTALModel.fk_Booking_details_Booking_booking_id" FromRole="tbl_Booking_details" ToRole="tbl_Booking" />
+    <NavigationProperty Name="tbl_Car" Relationship="CAR_RENTALModel.fk_Booking_details_Car_car_id" FromRole="tbl_Booking_details" ToRole="tbl_Car" />
+    <Property Name="status_return" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_Car">
+    <Key>
+      <PropertyRef Name="car_id" />
+    </Key>
+    <Property Name="car_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cate_id" Type="Int32" />
+    <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price_per_day" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="car_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="license_plate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="seat_count" Type="Int32" />
+    <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="car_type_id" Type="Int32" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="tbl_Booking_details" Relationship="CAR_RENTALModel.fk_Booking_details_Car_car_id" FromRole="tbl_Car" ToRole="tbl_Booking_details" />
+    <NavigationProperty Name="tbl_Car_type" Relationship="CAR_RENTALModel.fk_Car_Car_type_car_type_id" FromRole="tbl_Car" ToRole="tbl_Car_type" />
+    <NavigationProperty Name="tbl_Category" Relationship="CAR_RENTALModel.fk_Car_Category_cate_id" FromRole="tbl_Car" ToRole="tbl_Category" />
+  </EntityType>
+  <EntityType Name="tbl_Car_type">
+    <Key>
+      <PropertyRef Name="car_type_id" />
+    </Key>
+    <Property Name="car_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="car_type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Car" Relationship="CAR_RENTALModel.fk_Car_Car_type_car_type_id" FromRole="tbl_Car_type" ToRole="tbl_Car" />
+  </EntityType>
+  <EntityType Name="tbl_Category">
+    <Key>
+      <PropertyRef Name="cate_id" />
+    </Key>
+    <Property Name="cate_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="tbl_Car" Relationship="CAR_RENTALModel.fk_Car_Category_cate_id" FromRole="tbl_Category" ToRole="tbl_Car" />
+  </EntityType>
+  <EntityType Name="tbl_City">
+    <Key>
+      <PropertyRef Name="city_id" />
+    </Key>
+    <Property Name="city_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="city_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Customer" Relationship="CAR_RENTALModel.fk_Customer_City_city_id" FromRole="tbl_City" ToRole="tbl_Customer" />
+  </EntityType>
+  <EntityType Name="tbl_Customer">
+    <Key>
+      <PropertyRef Name="cus_id" />
+    </Key>
+    <Property Name="cus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="city_id" Type="Int32" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="cus_id_card" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Precision="0" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="district_id" Type="Int32" />
+    <NavigationProperty Name="tbl_Booking" Relationship="CAR_RENTALModel.fk_Booking_Customer_cus_id" FromRole="tbl_Customer" ToRole="tbl_Booking" />
+    <NavigationProperty Name="tbl_City" Relationship="CAR_RENTALModel.fk_Customer_City_city_id" FromRole="tbl_Customer" ToRole="tbl_City" />
+    <NavigationProperty Name="tbl_District" Relationship="CAR_RENTALModel.fk_Customer_District_district_id" FromRole="tbl_Customer" ToRole="tbl_District" />
+  </EntityType>
+  <EntityType Name="tbl_District">
+    <Key>
+      <PropertyRef Name="district_id" />
+    </Key>
+    <Property Name="district_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="district_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Customer" Relationship="CAR_RENTALModel.fk_Customer_District_district_id" FromRole="tbl_District" ToRole="tbl_Customer" />
+    <Property Name="city_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_Payment_type">
+    <Key>
+      <PropertyRef Name="payment_type_id" />
+    </Key>
+    <Property Name="payment_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Booking" Relationship="CAR_RENTALModel.fk_Booking_Payment_type_payment_type_id" FromRole="tbl_Payment_type" ToRole="tbl_Booking" />
+  </EntityType>
+  <Association Name="fk_Booking_Customer_cus_id">
+    <End Type="CAR_RENTALModel.tbl_Customer" Role="tbl_Customer" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Booking" Role="tbl_Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Customer">
+        <PropertyRef Name="cus_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking">
+        <PropertyRef Name="cus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Booking_details_Booking_booking_id">
+    <End Type="CAR_RENTALModel.tbl_Booking" Role="tbl_Booking" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Booking_details" Role="tbl_Booking_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Booking">
+        <PropertyRef Name="booking_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking_details">
+        <PropertyRef Name="booking_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Booking_Payment_type_payment_type_id">
+    <End Type="CAR_RENTALModel.tbl_Payment_type" Role="tbl_Payment_type" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Booking" Role="tbl_Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Payment_type">
+        <PropertyRef Name="payment_type_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking">
+        <PropertyRef Name="payment_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Booking_details_Car_car_id">
+    <End Type="CAR_RENTALModel.tbl_Car" Role="tbl_Car" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Booking_details" Role="tbl_Booking_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Car">
+        <PropertyRef Name="car_id" />
+      </Principal>
+      <Dependent Role="tbl_Booking_details">
+        <PropertyRef Name="car_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Car_Car_type_car_type_id">
+    <End Type="CAR_RENTALModel.tbl_Car_type" Role="tbl_Car_type" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Car" Role="tbl_Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Car_type">
+        <PropertyRef Name="car_type_id" />
+      </Principal>
+      <Dependent Role="tbl_Car">
+        <PropertyRef Name="car_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Car_Category_cate_id">
+    <End Type="CAR_RENTALModel.tbl_Category" Role="tbl_Category" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Car" Role="tbl_Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Category">
+        <PropertyRef Name="cate_id" />
+      </Principal>
+      <Dependent Role="tbl_Car">
+        <PropertyRef Name="cate_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Customer_City_city_id">
+    <End Type="CAR_RENTALModel.tbl_City" Role="tbl_City" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Customer" Role="tbl_Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_City">
+        <PropertyRef Name="city_id" />
+      </Principal>
+      <Dependent Role="tbl_Customer">
+        <PropertyRef Name="city_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Customer_District_district_id">
+    <End Type="CAR_RENTALModel.tbl_District" Role="tbl_District" Multiplicity="0..1" />
+    <End Type="CAR_RENTALModel.tbl_Customer" Role="tbl_Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_District">
+        <PropertyRef Name="district_id" />
+      </Principal>
+      <Dependent Role="tbl_Customer">
+        <PropertyRef Name="district_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
