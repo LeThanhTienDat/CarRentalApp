@@ -64,3 +64,13 @@ C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Admin\SetNewPassword.g
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Admin\SetNewPassword.baml
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CarReport.g.cs
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CarReport.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Booking\ReasonCancel.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Booking\ReasonCancel.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Guest\Guest.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Guest\Guest.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Guest\GuestBooking.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Guest\GuestBooking.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CategoryReport.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CustomerReport.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CategoryReport.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CustomerReport.baml

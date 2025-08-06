@@ -28,6 +28,7 @@
     <EntitySetMapping Name="tbl_Booking">
       <EntityTypeMapping TypeName="CAR_RENTALModel.tbl_Booking">
         <MappingFragment StoreEntitySet="tbl_Booking">
+          <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
           <ScalarProperty Name="complete_date" ColumnName="complete_date" />
           <ScalarProperty Name="reason_cancel" ColumnName="reason_cancel" />
           <ScalarProperty Name="is_cancel" ColumnName="is_cancel" />

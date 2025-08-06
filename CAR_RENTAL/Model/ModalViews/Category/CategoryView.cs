@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CAR_RENTAL.Model.ModalViews.Category
 {
-    internal class CategoryView
+    public class CategoryView
     {
         public int ID { get; set; }
         public string Title { get; set; }

@@ -325,6 +325,7 @@ namespace CAR_RENTAL.Views.Booking
                     btnChose.Click += (object sender, RoutedEventArgs e) =>
                     {
                         RemoveCarUpdateInfo();
+                        showTotalPaid.Text = "";
                         btnPlanCar.IsEnabled = true;
                         IdCarChosen = car.ID;                      
                         showModel.Text = car.Model;
@@ -760,6 +761,7 @@ namespace CAR_RENTAL.Views.Booking
                                 MessageBox.Show("Remove successful!");
                                 var reloadTotalPrice = BookingRepository.Instance.FindById(IdCusChosen);
                                 showTotalPaid.Text = reloadTotalPrice.TotalPrice.ToString() + " VNĐ";
+                                LoadBookings();
                                 LoadBookingDetails(IdCusChosen);
                                 LoadCars();
                                 showModel.Text = "";
@@ -832,43 +834,52 @@ namespace CAR_RENTAL.Views.Booking
                     Bookings.Children.Add(brItemNo);
 
                     //Column 2 (Name)
-                    Border brItemName = new Border();
-                    TextBlock tbItemName = new TextBlock();
-                    tbItemName.Text = item.CustomerView.Name;
-                    tbItemName.TextAlignment = TextAlignment.Center;
-                    tbItemName.VerticalAlignment = VerticalAlignment.Center;
-                    brItemName.Child = tbItemName;
-                    brItemName.Height = 25;
-                    brItemName.Background = rowBackground;
-                    Grid.SetColumn(brItemName, 1);
-                    Grid.SetRow(brItemName, index);
-                    Bookings.Children.Add(brItemName);
+                    if(item.CustomerView != null)
+                    {
+                        Border brItemName = new Border();
+                        TextBlock tbItemName = new TextBlock();
+                        tbItemName.Text = item.CustomerView.Name;
+                        tbItemName.TextAlignment = TextAlignment.Center;
+                        tbItemName.VerticalAlignment = VerticalAlignment.Center;
+                        brItemName.Child = tbItemName;
+                        brItemName.Height = 25;
+                        brItemName.Background = rowBackground;
+                        Grid.SetColumn(brItemName, 1);
+                        Grid.SetRow(brItemName, index);
+                        Bookings.Children.Add(brItemName);
+                    }
 
                     //Column 3 (Id Card Number)
-                    Border brItemIdCard = new Border();
-                    TextBlock tbItemIdCard = new TextBlock();
-                    tbItemIdCard.Text = item.CustomerView.CusIdCard;
-                    tbItemIdCard.VerticalAlignment = VerticalAlignment.Center;
-                    tbItemIdCard.TextAlignment = TextAlignment.Center;
-                    brItemIdCard.Child = tbItemIdCard;
-                    brItemIdCard.Height = 25;
-                    brItemIdCard.Background = rowBackground;
-                    Grid.SetColumn(brItemIdCard,2);
-                    Grid.SetRow(brItemIdCard, index);
-                    Bookings.Children.Add(brItemIdCard);
+                    if(item.CustomerView != null)
+                    {
+                        Border brItemIdCard = new Border();
+                        TextBlock tbItemIdCard = new TextBlock();
+                        tbItemIdCard.Text = item.CustomerView.CusIdCard;
+                        tbItemIdCard.VerticalAlignment = VerticalAlignment.Center;
+                        tbItemIdCard.TextAlignment = TextAlignment.Center;
+                        brItemIdCard.Child = tbItemIdCard;
+                        brItemIdCard.Height = 25;
+                        brItemIdCard.Background = rowBackground;
+                        Grid.SetColumn(brItemIdCard, 2);
+                        Grid.SetRow(brItemIdCard, index);
+                        Bookings.Children.Add(brItemIdCard);
+                    }
 
                     //Column 4(Phone)
-                    Border brItemPhone = new Border();
-                    TextBlock tbItemPhone = new TextBlock();
-                    tbItemPhone.Text = item.CustomerView.Phone;
-                    tbItemPhone.VerticalAlignment = VerticalAlignment.Center;
-                    tbItemPhone.TextAlignment= TextAlignment.Center;
-                    brItemPhone.Child = tbItemPhone;
-                    brItemPhone.Height = 25;
-                    brItemPhone.Background = rowBackground;
-                    Grid.SetColumn(brItemPhone, 3);
-                    Grid.SetRow(brItemPhone, index);
-                    Bookings.Children.Add(brItemPhone);
+                    if(item.CustomerView != null)
+                    {
+                        Border brItemPhone = new Border();
+                        TextBlock tbItemPhone = new TextBlock();
+                        tbItemPhone.Text = item.CustomerView.Phone;
+                        tbItemPhone.VerticalAlignment = VerticalAlignment.Center;
+                        tbItemPhone.TextAlignment = TextAlignment.Center;
+                        brItemPhone.Child = tbItemPhone;
+                        brItemPhone.Height = 25;
+                        brItemPhone.Background = rowBackground;
+                        Grid.SetColumn(brItemPhone, 3);
+                        Grid.SetRow(brItemPhone, index);
+                        Bookings.Children.Add(brItemPhone);
+                    }
 
                     //Column 5 (Car amount)
                     var carNumber = BookingRepository.Instance.CheckTotalCar(item.ID);
@@ -973,7 +984,7 @@ namespace CAR_RENTAL.Views.Booking
                         }
                         else if( getCarNotReturn != null && getCarNotReturn.Count > 0 )
                         {
-                            MessageBox.Show("There are some Cars is not return, please check and try again!");
+                            MessageBox.Show("Some cars were not returned. Please check and try again!");
                         }
                     };
                     Grid.SetColumn(btnComplete, 1);
@@ -986,19 +997,30 @@ namespace CAR_RENTAL.Views.Booking
                     btnCancel.Background = backgroundCancelBtn;
                     btnCancel.Click += (object sender, RoutedEventArgs e) =>
                     {
-                        var confirm = MessageBox.Show("Cancel this order ?","Confirm Delete",MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                        if( confirm == MessageBoxResult.Yes)
+                        var getCarNotReturn = BookingDetailsRepository.Instance.FindAllNotReturn(item.ID);
+                        if( getCarNotReturn == null || getCarNotReturn.Count == 0)
                         {
-                            var changeStatus = new BookingView();
-                            changeStatus.ID = item.ID;
-                            changeStatus.BookingStatus = "Canceled";
-                            var check = BookingRepository.Instance.CancelBooking(changeStatus);
-                            if (check)
+                            var confirm = MessageBox.Show("Cancel this order ?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                            if (confirm == MessageBoxResult.Yes)
                             {
-                                MessageBox.Show("Cancel successful!");
+
+                                Window getReason = new Views.Booking.ReasonCancel(item.ID);
+                                bool? result = getReason.ShowDialog();
+                                if (result == true)
+                                {
+                                    MessageBox.Show("This booking has been canceled!");
+                                    LoadBookings();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("There is error when cancel this booking, please try again!");
+                                }
                             }
-                            LoadBookings();
                         }
+                        else
+                        {
+                            MessageBox.Show("Some cars were not returned. Please make sure all car has been returned before try again!");
+                        }                     
                     };
                     Grid.SetColumn(btnCancel, 2);
                     grItemAction.Children.Add(btnCancel);
@@ -1129,6 +1151,8 @@ namespace CAR_RENTAL.Views.Booking
                     item.StatusReturn = 1;
                     item.BookingDetailsStatus = "Returned";
                     CarRepository.Instance.UpdateStatusCar(IdCarChosen, "Waiting");
+                    BookingDetailsView newStatus = new BookingDetailsView();
+                    
                 }
 
                 var checkUpdate = BookingDetailsRepository.Instance.Update(item);

@@ -46,6 +46,7 @@
           <Property Name="is_cancel" Type="int" />
           <Property Name="reason_cancel" Type="nvarchar" MaxLength="200" />
           <Property Name="complete_date" Type="date" />
+          <Property Name="cancel_date" Type="date" />
         </EntityType>
         <EntityType Name="tbl_Booking_details">
           <Key>
@@ -369,6 +370,7 @@
           <Property Name="is_cancel" Type="Int32" />
           <Property Name="reason_cancel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="complete_date" Type="DateTime" Precision="0" />
+          <Property Name="cancel_date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="tbl_Booking_details">
           <Key>
@@ -600,6 +602,7 @@
           <EntitySetMapping Name="tbl_Booking">
             <EntityTypeMapping TypeName="CAR_RENTALModel.tbl_Booking">
               <MappingFragment StoreEntitySet="tbl_Booking">
+                <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
                 <ScalarProperty Name="complete_date" ColumnName="complete_date" />
                 <ScalarProperty Name="reason_cancel" ColumnName="reason_cancel" />
                 <ScalarProperty Name="is_cancel" ColumnName="is_cancel" />

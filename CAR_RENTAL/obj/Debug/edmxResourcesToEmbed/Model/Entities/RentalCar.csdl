@@ -89,6 +89,7 @@
     <Property Name="is_cancel" Type="Int32" />
     <Property Name="reason_cancel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="complete_date" Type="DateTime" Precision="0" />
+    <Property Name="cancel_date" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tbl_Booking_details">
     <Key>

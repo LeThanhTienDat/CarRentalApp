@@ -158,7 +158,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 1
                 Border brItemCarId = new Border();
                 TextBlock tbItemCarId = new TextBlock();
-                tbItemCarId.Text = mostRented.ID.ToString();
+                tbItemCarId.Text = leastRented.ID.ToString();
                 tbItemCarId.VerticalAlignment = VerticalAlignment.Center;
                 tbItemCarId.TextAlignment = TextAlignment.Center;
                 brItemCarId.Child = tbItemCarId;
@@ -171,7 +171,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 2
                 Border brItemLicensePlate = new Border();
                 TextBlock tbItemLicensePlate = new TextBlock();
-                tbItemLicensePlate.Text = mostRented.LicensePlate.ToString();
+                tbItemLicensePlate.Text = leastRented.LicensePlate.ToString();
                 tbItemLicensePlate.VerticalAlignment = VerticalAlignment.Center;
                 tbItemLicensePlate.TextAlignment = TextAlignment.Center;
                 brItemLicensePlate.Child = tbItemLicensePlate;
@@ -184,7 +184,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 3
                 Border brItemBrand = new Border();
                 TextBlock tbItemBrand = new TextBlock();
-                tbItemBrand.Text = mostRented.Brand.ToString();
+                tbItemBrand.Text = leastRented.Brand.ToString();
                 tbItemBrand.VerticalAlignment = VerticalAlignment.Center;
                 tbItemBrand.TextAlignment = TextAlignment.Center;
                 brItemBrand.Child = tbItemBrand;
@@ -197,7 +197,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 4
                 Border brItemModel = new Border();
                 TextBlock tbItemModel = new TextBlock();
-                tbItemModel.Text = mostRented.Model.ToString();
+                tbItemModel.Text = leastRented.Model.ToString();
                 tbItemModel.VerticalAlignment = VerticalAlignment.Center;
                 tbItemModel.TextAlignment = TextAlignment.Center;
                 brItemModel.Child = tbItemModel;
@@ -210,7 +210,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 5
                 Border brItemCount = new Border();
                 TextBlock tbItemCount = new TextBlock();
-                tbItemCount.Text = mostRented.RentCount.ToString();
+                tbItemCount.Text = leastRented.RentCount.ToString();
                 tbItemCount.VerticalAlignment = VerticalAlignment.Center;
                 tbItemCount.TextAlignment = TextAlignment.Center;
                 brItemCount.Child = tbItemCount;
@@ -223,7 +223,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 6
                 Border brItemCategory = new Border();
                 TextBlock tbItemCategory = new TextBlock();
-                tbItemCategory.Text = mostRented.CategoryName;
+                tbItemCategory.Text = leastRented.CategoryName;
                 tbItemCategory.VerticalAlignment = VerticalAlignment.Center;
                 tbItemCategory.TextAlignment = TextAlignment.Center;
                 brItemCategory.Child = tbItemCategory;
@@ -236,7 +236,7 @@ namespace CAR_RENTAL.Views.Report
                 //Column 7
                 Border brItemCarType = new Border();
                 TextBlock tbItemCarType = new TextBlock();
-                tbItemCarType.Text = mostRented.CarTypeName;
+                tbItemCarType.Text = leastRented.CarTypeName;
                 tbItemCarType.VerticalAlignment = VerticalAlignment.Center;
                 tbItemCarType.TextAlignment = TextAlignment.Center;
                 brItemCarType.Child = tbItemCarType;

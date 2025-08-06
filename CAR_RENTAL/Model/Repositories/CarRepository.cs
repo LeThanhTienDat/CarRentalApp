@@ -378,12 +378,20 @@ namespace CAR_RENTAL.Model.Repositories
             try
             {
                 DbCarRental en = new DbCarRental();
-                var item = (from bd in en.tbl_Booking_details
-                            group bd by bd.car_id into g
-                            join c in en.tbl_Car on g.Key equals c.car_id
+                var rentCount = (from bd in en.tbl_Booking_details
+                                 group bd by bd.car_id into g
+                                 select new
+                                 {
+                                     CarId = g.Key,
+                                     RentCount = g.Count()
+                                 }).ToList();
+                int maxCount = rentCount.Max(x => x.RentCount);
+                var item = (from rc in rentCount
+                            where rc.RentCount == maxCount
+                            join c in en.tbl_Car on rc.CarId equals c.car_id
                             join ctype in en.tbl_Car_type on c.car_type_id equals ctype.car_type_id
                             join cate in en.tbl_Category on c.cate_id equals cate.cate_id
-                            orderby g.Count() descending
+                            orderby rc.RentCount descending
                             select new CarView
                             {
                                 ID = c.car_id,
@@ -400,7 +408,7 @@ namespace CAR_RENTAL.Model.Repositories
                                 CarTypeId = c.car_type_id,
                                 CarTypeName = ctype.car_type_name,
                                 CategoryName = cate.title,
-                                RentCount = g.Count()
+                                RentCount = rc.RentCount
                             }).FirstOrDefault();
                 return item;
             }
@@ -415,12 +423,20 @@ namespace CAR_RENTAL.Model.Repositories
             try
             {
                 DbCarRental en = new DbCarRental();
-                var item = (from bd in en.tbl_Booking_details
-                            group bd by bd.car_id into g
-                            join c in en.tbl_Car on g.Key equals c.car_id
+                var rentCount = (from bd in en.tbl_Booking_details
+                                 group bd by bd.car_id into g
+                                 select new
+                                 {
+                                     CarId = g.Key,
+                                     RentCount = g.Count()
+                                 }).ToList();
+                int minCount = rentCount.Min(x => x.RentCount);
+                var item = (from rc in rentCount
+                            where rc.RentCount == minCount
+                            join c in en.tbl_Car on rc.CarId equals c.car_id
                             join ctype in en.tbl_Car_type on c.car_type_id equals ctype.car_type_id
                             join cate in en.tbl_Category on c.cate_id equals cate.cate_id
-                            orderby g.Count() ascending
+                            orderby rc.RentCount ascending
                             select new CarView
                             {
                                 ID = c.car_id,
@@ -437,7 +453,7 @@ namespace CAR_RENTAL.Model.Repositories
                                 CarTypeId = c.car_type_id,
                                 CarTypeName = ctype.car_type_name,
                                 CategoryName = cate.title,
-                                RentCount = g.Count()
+                                RentCount = rc.RentCount
                             }).FirstOrDefault();
                 return item;
             }

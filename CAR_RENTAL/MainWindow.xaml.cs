@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CAR_RENTAL.Components;
 using CAR_RENTAL.Views.Booking;
+using CAR_RENTAL.Model.ModalViews.Booking;
+using CAR_RENTAL.Model.ModalViews.Customer;
 
 namespace CAR_RENTAL
 {
@@ -25,6 +27,7 @@ namespace CAR_RENTAL
     public partial class MainWindow : Window
     {
         private AdminView currentUser;
+        private CustomerView guest;
         private bool IsAdmin;
         public MainWindow()
         {
@@ -39,6 +42,13 @@ namespace CAR_RENTAL
             currentUser = user.CurrentUser;
             IsAdmin = user.IsAdmin;
             Authorization();            
+        }
+        public MainWindow(CustomerView infoGuest)
+        {
+            InitializeComponent();
+            guest = infoGuest;
+            IsAdmin = false;
+            Authorization();
         }
         private void Authorization()
         {
@@ -100,5 +110,22 @@ namespace CAR_RENTAL
         {
             MainContent.Content = new Views.Report.CarReport();
         }
+        private void CustomerReport_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Views.Report.CustomerReport();
+        }
+        private void CategoryReport_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Views.Report.CategoryReport();
+        }
+
+
+        //Guest
+        private void GuestBooking_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Views.Guest.GuestBooking(guest);
+        }
+
+
     }
 }

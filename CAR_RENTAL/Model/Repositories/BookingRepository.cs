@@ -8,6 +8,7 @@ using System.Data.Entity.Core;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CAR_RENTAL.Model.Repositories
@@ -489,7 +490,7 @@ namespace CAR_RENTAL.Model.Repositories
                                      TotalPrice = d.b.total_price,
                                      OrderDate = d.b.order_date,
                                      Paid = d.b.paid,
-                                     CustomerView = new ModalViews.Customer.CustomerView
+                                     CustomerView = d.cus == null ? null : new ModalViews.Customer.CustomerView
                                      {
                                          Name = d.cus != null ? d.cus.name : null,
                                          Email = d.cus.email,
@@ -503,36 +504,7 @@ namespace CAR_RENTAL.Model.Repositories
                                          Active = d.cus.active,
                                          CusIdCard = d.cus.cus_id_card,
                                          CreateDate = d.cus.create_date
-                                     }
-                                     //BookingDetailsView = new ModalViews.BookingDetails.BookingDetailsView
-                                     //{
-                                     //    CarId = d.bd.car_id,
-                                     //    BookingDetailsStatus = d.bd.booking_details_status,
-                                     //    BookingDate = d.bd.booking_date,
-                                     //    StartDate = d.bd.start_date,
-                                     //    EndDate = d.bd.end_date,
-                                     //    ActualReturnDate = d.bd.actual_return_date,
-                                     //    PricePerCar = d.bd != null ? d.bd.price_per_car : 0,
-                                     //    Fine = d.bd.fine,
-                                     //    Refund = d.bd.refund,
-                                     //    StatusReturn = d.bd.status_return,
-                                     //    CarView = new ModalViews.Car.CarView
-                                     //    {
-                                     //        CateId = d.car.cate_id,
-                                     //        Brand = d.car != null ? d.car.brand : null,
-                                     //        Model = d.car.model,
-                                     //        PricePerDay = d.car.price_per_day ?? 0,
-                                     //        CarStatus = d.car.car_status,
-                                     //        Image = d.car.image,
-                                     //        LicensePlate = d.car.license_plate,
-                                     //        SeatCount = d.car.seat_count,
-                                     //        Color = d.car.color,
-                                     //        CarTypeId = d.car.car_type_id,
-                                     //        CarTypeName = d.ctype.car_type_name,
-                                     //        Active = d.car.active,
-                                     //        CategoryName = d.cate.title
-                                     //    }
-                                     //}
+                                     }                                    
                                  };
                              }).ToHashSet();
                 return items;
@@ -631,6 +603,9 @@ namespace CAR_RENTAL.Model.Repositories
                 DbCarRental en = new DbCarRental();
                 var item = en.tbl_Booking.Where(d => d.booking_id == entity.ID).FirstOrDefault();
                 item.booking_status = entity.BookingStatus;
+                item.cancel_date = entity.CancelDate;
+                item.reason_cancel = entity.ReasonCancel;
+                item.is_cancel = 1;
                 en.SaveChanges();
                 return true;
             }
@@ -715,7 +690,7 @@ namespace CAR_RENTAL.Model.Repositories
             {
                 DbCarRental en = new DbCarRental();
                 var bookingCanceled = (from b in en.tbl_Booking
-                                       where b.is_cancel == 1
+                                       where b.booking_status == "Canceled"
                                        select b.booking_id).Count();
                 return bookingCanceled;
             }
@@ -755,6 +730,243 @@ namespace CAR_RENTAL.Model.Repositories
                 Debug.WriteLine(ex.Message);
             }
             return 0;
+        }
+        public HashSet<BookingView> FindBookingByStatus(string filter = null)
+        {
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var rawItems = (from b in en.tbl_Booking
+                                join cus in en.tbl_Customer on b.cus_id equals cus.cus_id into cusGroup
+                                from cus in cusGroup.DefaultIfEmpty()
+                                join dis in en.tbl_District on cus.district_id equals dis.district_id into disGroup
+                                from dis in disGroup.DefaultIfEmpty()
+                                join city in en.tbl_City on cus.city_id equals city.city_id into cityGroup
+                                from city in cityGroup.DefaultIfEmpty()
+                                join bd in en.tbl_Booking_details on b.booking_id equals bd.booking_id into bdGroup
+                                from bd in bdGroup.DefaultIfEmpty()
+                                join car in en.tbl_Car on bd.car_id equals car.car_id into carGroup
+                                from car in carGroup.DefaultIfEmpty()
+                                join ctype in en.tbl_Car_type on car.car_type_id equals ctype.car_type_id into carTypeGroup
+                                from ctype in carTypeGroup.DefaultIfEmpty()
+                                join cate in en.tbl_Category on car.cate_id equals cate.cate_id into cateGroup
+                                from cate in cateGroup.DefaultIfEmpty()
+                                join pt in en.tbl_Payment_type on b.payment_type_id equals pt.payment_type_id into ptGroup
+                                from pt in ptGroup.DefaultIfEmpty()                               
+                                select new
+                                {
+                                    b,
+                                    cus,
+                                    dis,
+                                    city,
+                                    bd,
+                                    car,
+                                    ctype,
+                                    cate,
+                                    pt
+                                }).ToList();         
+                if(filter != null)
+                {
+                    rawItems = rawItems.Where(d => d.b.booking_status == filter).ToList();
+                }
+                var items = rawItems
+                             .GroupBy(d => d.b.booking_id)
+                             .Select(g =>
+                             {
+                                 var d = g.First();
+                                 return new BookingView
+                                 {
+                                     ID = d.b.booking_id,
+                                     CusId = d.b.cus_id,
+                                     BookingStatus = d.b.booking_status,
+                                     Discount = d.b.discount,
+                                     Deposit = d.b.deposit,
+                                     PaymentTypeId = d.b.payment_type_id,
+                                     PaymentTypeName = d.pt.name,
+                                     TotalPrice = d.b.total_price,
+                                     OrderDate = d.b.order_date,
+                                     Paid = d.b.paid,
+                                     IsCancel = d.b.is_cancel ?? 0,
+                                     CancelDate = d.b.cancel_date,
+                                     ReasonCancel = d.b.reason_cancel,
+                                     CompletedDate = d.b.complete_date,
+                                     CustomerView = new ModalViews.Customer.CustomerView
+                                     {
+                                         Name = d.cus != null ? d.cus.name : null,
+                                         Email = d.cus.email,
+                                         Password = d.cus.password,
+                                         Phone = d.cus.phone,
+                                         Address = d.cus.address,
+                                         CityId = d.cus.city_id,
+                                         CityName = d.city.city_name,
+                                         DistrictId = d.cus.district_id,
+                                         DistrictName = d.dis != null ? d.dis.district_name : null,
+                                         Active = d.cus.active,
+                                         CusIdCard = d.cus.cus_id_card,
+                                         CreateDate = d.cus.create_date
+                                     },
+                                     BookingDetailsView = g
+                                        .Where(x => x.bd != null)
+                                        .Select(x => new ModalViews.BookingDetails.BookingDetailsView
+                                        {
+                                            ID = x.bd.booking_details_id,
+                                            BookingId = x.bd.booking_id,
+                                            CarId = x.car.car_id,
+                                            BookingDetailsStatus = x.bd.booking_details_status,
+                                            BookingDate = x.bd.booking_date,
+                                            StartDate = x.bd.start_date,
+                                            EndDate = x.bd.end_date,
+                                            ActualReturnDate = x.bd.actual_return_date,
+                                            PricePerCar = x.bd.price_per_car,
+                                            Refund = x.bd.refund,
+                                            Fine = x.bd.fine,
+                                            StatusReturn = x.bd.status_return,
+                                            CarView = new Model.ModalViews.Car.CarView
+                                            {
+                                                ID = x.car.car_id,
+                                                CateId = x.car.cate_id,
+                                                Brand = x.car.brand,
+                                                Model = x.car.model,
+                                                PricePerDay = x.car.price_per_day ?? 0,
+                                                CarStatus = x.car.car_status,
+                                                LicensePlate = x.car.license_plate,
+                                                Image = x.car.image,
+                                                SeatCount =x.car.seat_count ?? 0,
+                                                Color = x.car.color,
+                                                Active = x.car.active,
+                                                CarTypeId = x.car.car_type_id,
+                                                CarTypeName = x.ctype.car_type_name,
+                                                CategoryName = x.cate.title
+                                            }
+                                        }).ToHashSet()
+                                 };
+                             }).ToHashSet();
+                return items;
+            }
+            catch (EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return new HashSet<BookingView>();
+        }
+
+        public BookingView FindGuest(string phone, string idCard)
+        {
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var rawItems = (from b in en.tbl_Booking
+                                join cus in en.tbl_Customer on b.cus_id equals cus.cus_id into cusGroup
+                                from cus in cusGroup.DefaultIfEmpty()
+                                join dis in en.tbl_District on cus.district_id equals dis.district_id into disGroup
+                                from dis in disGroup.DefaultIfEmpty()
+                                join city in en.tbl_City on cus.city_id equals city.city_id into cityGroup
+                                from city in cityGroup.DefaultIfEmpty()
+                                join bd in en.tbl_Booking_details on b.booking_id equals bd.booking_id into bdGroup
+                                from bd in bdGroup.DefaultIfEmpty()
+                                join car in en.tbl_Car on bd.car_id equals car.car_id into carGroup
+                                from car in carGroup.DefaultIfEmpty()
+                                join ctype in en.tbl_Car_type on car.car_type_id equals ctype.car_type_id into carTypeGroup
+                                from ctype in carTypeGroup.DefaultIfEmpty()
+                                join cate in en.tbl_Category on car.cate_id equals cate.cate_id into cateGroup
+                                from cate in cateGroup.DefaultIfEmpty()
+                                join pt in en.tbl_Payment_type on b.payment_type_id equals pt.payment_type_id into ptGroup
+                                from pt in ptGroup.DefaultIfEmpty()
+                                where cus != null && cus.phone == phone && cus.cus_id_card == idCard
+                                select new
+                                {
+                                    b,
+                                    cus,
+                                    dis,
+                                    city,
+                                    bd,
+                                    car,
+                                    ctype,
+                                    cate,
+                                    pt
+                                }).ToList();
+                var items = rawItems
+                             .GroupBy(d => d.b.booking_id).FirstOrDefault();
+                if(items == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    var d = items.First();
+                    return new BookingView
+                    {
+                        ID = d.b.booking_id,
+                        CusId = d.b.cus_id,
+                        BookingStatus = d.b.booking_status,
+                        Discount = d.b.discount,
+                        Deposit = d.b.deposit,
+                        PaymentTypeId = d.b.payment_type_id,
+                        PaymentTypeName = d.pt.name,
+                        TotalPrice = d.b.total_price,
+                        OrderDate = d.b.order_date,
+                        Paid = d.b.paid,
+                        IsCancel = d.b.is_cancel ?? 0,
+                        CancelDate = d.b.cancel_date,
+                        ReasonCancel = d.b.reason_cancel,
+                        CompletedDate = d.b.complete_date,
+                        CustomerView = new ModalViews.Customer.CustomerView
+                        {
+                            Name = d.cus != null ? d.cus.name : null,
+                            Email = d.cus.email,
+                            Password = d.cus.password,
+                            Phone = d.cus.phone,
+                            Address = d.cus.address,
+                            CityId = d.cus.city_id,
+                            CityName = d.city!= null ? d.city.city_name : null,
+                            DistrictId = d.cus.district_id,
+                            DistrictName = d.dis != null ? d.dis.district_name : null,
+                            Active = d.cus.active,
+                            CusIdCard = d.cus.cus_id_card,
+                            CreateDate = d.cus.create_date
+                        },
+                        BookingDetailsView = items
+                            .Where(x => x.bd != null)
+                            .Select(x => new ModalViews.BookingDetails.BookingDetailsView
+                            {
+                                ID = x.bd.booking_details_id,
+                                BookingId = x.bd.booking_id,
+                                CarId = x.car.car_id,
+                                BookingDetailsStatus = x.bd.booking_details_status,
+                                BookingDate = x.bd.booking_date,
+                                StartDate = x.bd.start_date,
+                                EndDate = x.bd.end_date,
+                                ActualReturnDate = x.bd.actual_return_date,
+                                PricePerCar = x.bd.price_per_car,
+                                Refund = x.bd.refund,
+                                Fine = x.bd.fine,
+                                StatusReturn = x.bd.status_return,
+                                CarView = new Model.ModalViews.Car.CarView
+                                {
+                                    ID = x.car.car_id,
+                                    CateId = x.car.cate_id,
+                                    Brand = x.car.brand,
+                                    Model = x.car.model,
+                                    PricePerDay = x.car.price_per_day ?? 0,
+                                    CarStatus = x.car.car_status,
+                                    LicensePlate = x.car.license_plate,
+                                    Image = x.car.image,
+                                    SeatCount = x.car.seat_count ?? 0,
+                                    Color = x.car.color,
+                                    Active = x.car.active,
+                                    CarTypeId = x.car.car_type_id,
+                                    CarTypeName = x.ctype != null ? x.ctype.car_type_name : null,
+                                    CategoryName = x.cate != null ? x.cate.title : null
+                                }
+                            }).ToHashSet()
+                    };
+                }                          
+            }
+            catch(EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }           
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿<Window x:Class="CAR_RENTAL.Views.Booking.ReasonCancel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CAR_RENTAL.Views.Booking"
+        mc:Ignorable="d"
+        Title="ReasonCancel" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="107*"/>
+            <RowDefinition Height="35*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="inputReasonCancel" HorizontalAlignment="Center" Margin="0,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" FontSize="16" Height="139"/>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Confirm Cancel" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" Height="38" Width="133" FontSize="16" Click="ConfirmCancel"/>
+            <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="38" Width="133" FontSize="16" Grid.Column="1" Click="StopCancel"/>
+
+        </Grid>
+        <Label Content="Reason cancel" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="178" FontSize="22" HorizontalContentAlignment="Center" Height="48"/>
+    </Grid>
+</Window>

@@ -41,6 +41,7 @@
     <Property Name="is_cancel" Type="int" />
     <Property Name="reason_cancel" Type="nvarchar" MaxLength="200" />
     <Property Name="complete_date" Type="date" />
+    <Property Name="cancel_date" Type="date" />
   </EntityType>
   <EntityType Name="tbl_Booking_details">
     <Key>

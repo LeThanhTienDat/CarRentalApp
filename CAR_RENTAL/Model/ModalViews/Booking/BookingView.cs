@@ -8,7 +8,7 @@ using CAR_RENTAL.Model.ModalViews.BookingDetails;
 
 namespace CAR_RENTAL.Model.ModalViews.Booking
 {
-    internal class BookingView
+    public class BookingView
     {
         public int ID { get; set; }
         public int? CusId { get; set; }
@@ -26,6 +26,7 @@ namespace CAR_RENTAL.Model.ModalViews.Booking
         public decimal Refund { get; set; }
         public int IsCancel { set; get; }
         public string ReasonCancel { set; get; }
+        public DateTime? CancelDate { set;get; }
         public DateTime? OrderDate { set; get; }
         public DateTime? CompletedDate { set; get; }
         public CustomerView  CustomerView { set; get; }

@@ -41,7 +41,7 @@ namespace CAR_RENTAL.Views.Booking
                 int countLate = 0;
                 int countSoon = 0;
                 int countOnTime = 0;
-                decimal? countFind = 0;
+                decimal? countFine = 0;
                 decimal? countRefund = 0;
                 foreach (var i in item.BookingDetailsView)
                 {
@@ -59,11 +59,11 @@ namespace CAR_RENTAL.Views.Booking
                     {
                         countOnTime++;
                     }
-                    if(i.Refund != null)
+                    if(i.Fine != null)
                     {
-                        countFind += i.Fine;
+                        countFine += i.Fine;
                     }
-                    if(i.Refund!= null)
+                    if(i.Refund != null)
                     {
                         countRefund += i.Refund;
                     }
@@ -78,10 +78,11 @@ namespace CAR_RENTAL.Views.Booking
                 showDepositCash.Text = item.DepositCash.ToString()+ " VND";
                 showDepositCashHasPaid.IsChecked = item.DepositHasPaid == 1 ? true : false;
                 showTotalPrice.Text = item.TotalPrice.ToString() + " VND";
-                showFine.Text = countFind.ToString() +" VND";
+                showFine.Text = countFine.ToString() +" VND";
                 showRefund.Text = countRefund.ToString() + " VND";
                 decimal? remainCash = item.TotalPrice - item.DepositCash;
-                showRemainCash.Text = remainCash.ToString() + " VND";              
+                showRemainCash.Text = remainCash.ToString() + " VND";
+                showTotalMustPay.Text = (remainCash + countFine - countRefund).ToString() + " VND";
 
                 var listCars = BookingDetailsRepository.Instance.FindByBookingId(item.ID);               
                 LoadCars(listCars);

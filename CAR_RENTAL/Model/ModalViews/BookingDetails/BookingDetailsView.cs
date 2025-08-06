@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CAR_RENTAL.Model.ModalViews.BookingDetails
 {
-    internal class BookingDetailsView
+    public class BookingDetailsView
     {
         public int ID { get; set; }
         public int? BookingId { get; set; }

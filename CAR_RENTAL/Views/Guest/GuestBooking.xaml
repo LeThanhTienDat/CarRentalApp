@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="CAR_RENTAL.Views.Guest.GuestBooking"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CAR_RENTAL.Views.Guest"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1500"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="581*"/>
+                <ColumnDefinition Width="919*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="132*"/>
+                    <ColumnDefinition Width="168*"/>
+                    <ColumnDefinition Width="281*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="123*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Booking ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Height="32"/>
+                <TextBlock x:Name="showBookingId" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <Label Content="Status" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="1" Height="32"/>
+                <Label Content="Discount" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="2" Height="32"/>
+                <Label Content="Deposit (%)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="3" Height="32"/>
+                <Label Content="Deposit (Cash)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="4" Height="32"/>
+                <TextBlock x:Name="showBookingStatus" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="1" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <TextBlock x:Name="showDiscount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="2" Margin="0,5,0,0" Grid.RowSpan="2" Text=""/>
+                <TextBlock x:Name="showDeposit" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="3" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <TextBlock x:Name="showDepositCash" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="4" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <Label Content="Total Price" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="5" Height="32"/>
+                <Label Content="Total Must Pay" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="9" Height="32"/>
+                <Label Content="Refund" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="7" Height="32"/>
+                <Label Content="Fine" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="8" Height="32"/>
+                <TextBlock x:Name="showTotalPrice" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="5" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <TextBlock x:Name="showMustPay" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="9" Margin="0,5,0,0"/>
+                <TextBlock x:Name="showRefund" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="7" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <TextBlock x:Name="showFine" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="8" Margin="0,6,0,0" Grid.RowSpan="2"/>
+                <Label Content="Remain Cash" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Right" Width="120" Grid.Row="6" Height="32"/>
+                <TextBlock x:Name="showRemainCash" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="6" Margin="0,5,0,0" Grid.RowSpan="2"/>
+                <Label Content="Payment Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" HorizontalContentAlignment="Right" Width="142" Grid.Row="9" Height="32" Margin="-10,30,0,0"/>
+                <TextBlock x:Name="showPaymentConfirm" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="16" Width="158" Height="32" Grid.Row="9" Margin="0,35,0,0"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="37*"/>
+                    <RowDefinition Height="378*"/>
+                </Grid.RowDefinitions>
+                <ComboBox x:Name="ChoseTypeBooking" HorizontalAlignment="Left" Margin="18,0,0,0" VerticalAlignment="Center" Width="164" SelectionChanged="ReloadBooking">
+                    <ComboBoxItem Content="Current Booking" Tag="Waiting" IsSelected="true"/>
+                    <ComboBoxItem Content="Previous Booking" Tag="Completed"/>
+                    <ComboBoxItem Content="Canceled Booking" Tag="Canceled"/>
+                </ComboBox>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="91*"/>
+                            <ColumnDefinition Width="129*"/>
+                            <ColumnDefinition Width="149*"/>
+                            <ColumnDefinition Width="154*"/>
+                            <ColumnDefinition Width="147*"/>
+                            <ColumnDefinition Width="249*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Booking ID" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center" Width="129" Height="32" Grid.Column="1"/>
+                        <Label Content="Booking Date" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center" Width="149" Height="32" Grid.Column="2"/>
+                        <Label Content="No." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center" Width="91" Height="32"/>
+                        <Label Content="Car Amount" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center" Width="154" Height="32" Grid.Column="3"/>
+                        <Label Content="Status" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center" Width="147" Height="32" Grid.Column="4"/>
+                        <Label Content="Action" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center" Width="147" Height="32" Grid.Column="5" Margin="33,0,0,0"/>
+
+                    </Grid>
+                    <ScrollViewer   VerticalScrollBarVisibility="Auto"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    Grid.Row="1">
+                        <Grid Grid.Row="1" x:Name="Bookings">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="91*"/>
+                                <ColumnDefinition Width="129*"/>
+                                <ColumnDefinition Width="149*"/>
+                                <ColumnDefinition Width="154*"/>
+                                <ColumnDefinition Width="147*"/>
+                                <ColumnDefinition Width="249*"/>
+                            </Grid.ColumnDefinitions>
+
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="82*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="66*"/>
+                    <ColumnDefinition Width="156*"/>
+                    <ColumnDefinition Width="110*"/>
+                    <ColumnDefinition Width="104*"/>
+                    <ColumnDefinition Width="119*"/>
+                    <ColumnDefinition Width="94*"/>
+                    <ColumnDefinition Width="74*"/>
+                    <ColumnDefinition Width="130*"/>
+                    <ColumnDefinition Width="114*"/>
+                    <ColumnDefinition Width="113*"/>
+                    <ColumnDefinition Width="110*"/>
+                    <ColumnDefinition Width="175*"/>
+                    <ColumnDefinition Width="135*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="No." HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="66" FontSize="16" HorizontalContentAlignment="Center"/>
+                <Label Content="Brand" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="106" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="2"/>
+                <Label Content="Model" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="102" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="3" />
+                <Label Content="License Plate" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="122" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="4" />
+                <Label Content="Seat" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="94" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="5" />
+                <Label Content="Color" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="73" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="6" />
+                <Label Content="Image" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="150" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="1" />
+                <Label Content="Price per Day" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="130" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="7" />
+                <Label Content="Start Date" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="110" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="8" />
+                <Label Content="End Date" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="110" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="9" />
+                <Label Content="Total Day" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="110" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="10"/>
+                <Label Content="Total  price / Car" HorizontalAlignment="Center" VerticalAlignment="Center" Height="39" Width="172" FontSize="16" HorizontalContentAlignment="Center" Grid.Column="11"/>
+
+            </Grid>
+            <ScrollViewer   VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Auto"
+                Grid.Row="1">
+                <Grid Grid.Row="1" x:Name="Cars">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="66*"/>
+                        <ColumnDefinition Width="156*"/>
+                        <ColumnDefinition Width="110*"/>
+                        <ColumnDefinition Width="104*"/>
+                        <ColumnDefinition Width="119*"/>
+                        <ColumnDefinition Width="94*"/>
+                        <ColumnDefinition Width="74*"/>
+                        <ColumnDefinition Width="130*"/>
+                        <ColumnDefinition Width="114*"/>
+                        <ColumnDefinition Width="113*"/>
+                        <ColumnDefinition Width="110*"/>
+                        <ColumnDefinition Width="175*"/>
+                        <ColumnDefinition Width="135*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</UserControl>

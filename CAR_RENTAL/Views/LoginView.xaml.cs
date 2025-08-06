@@ -4,6 +4,7 @@ using CAR_RENTAL.Model.Repositories;
 using CAR_RENTAL.Views.Admin;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,9 +79,19 @@ namespace CAR_RENTAL.Views
 
         private void LoginByGuest(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            try
+            {
+                Window guest = new Views.Guest.Guest();
+                bool? result = guest.ShowDialog();
+                if(result == true)
+                {
+                    this.Close();
+                }               
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }

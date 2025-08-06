@@ -22,8 +22,7 @@
                 </MenuItem>
 
                 <MenuItem Header="Customer" x:Name="CustomerMenu">
-                    <MenuItem Header="Profile"/>
-                    <MenuItem Header="Booking"/>
+                    <MenuItem Header="Booking" Click="GuestBooking_Click"/>
                     <Separator/>
                     <MenuItem Header="Logout" Click="Logout"/>
                 </MenuItem>
@@ -31,8 +30,8 @@
                 <MenuItem Header="Report" x:Name="ReportMenu">
                     <MenuItem Header="Bookings" Click="BookingReport_Click"/>
                     <MenuItem Header="Cars" Click="CarReport_Click"/>
-                    <MenuItem Header="Categories"/>
-                    <MenuItem Header="Customers"/>
+                    <MenuItem Header="Categories" Click="CategoryReport_Click"/>
+                    <MenuItem Header="Customers" Click="CustomerReport_Click"/>
                 </MenuItem>
             </Menu>
 

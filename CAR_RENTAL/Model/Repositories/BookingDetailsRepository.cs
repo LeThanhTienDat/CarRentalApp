@@ -139,8 +139,12 @@ namespace CAR_RENTAL.Model.Repositories
                 item.start_date = entity.StartDate;
                 item.end_date = entity.EndDate;
                 item.price_per_car = entity.PricePerCar;
-                item.status_return = entity.StatusReturn != null ? entity.StatusReturn : 0;
-                item.actual_return_date = entity.ActualReturnDate;
+                if(entity.ActualReturnDate != null)
+                {
+                    item.status_return = entity.StatusReturn != null ? entity.StatusReturn : 0;
+                    item.actual_return_date = entity.ActualReturnDate;
+                    item.booking_details_status = entity.BookingDetailsStatus;
+                }
                 en.SaveChanges();
                 return true;
             }catch(EntityException ex)
@@ -202,6 +206,25 @@ namespace CAR_RENTAL.Model.Repositories
                 Debug.WriteLine(ex.Message);
             }
             return new HashSet<BookingDetailsView>();
+        }
+        public bool UpdateStatus(BookingDetailsView entity)
+        {
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var item = en.tbl_Booking_details.Where(d => d.booking_details_id == entity.ID).FirstOrDefault();
+                if(item != null)
+                {
+                    item.booking_details_status = entity.BookingDetailsStatus;
+                }
+                en.SaveChanges();
+                return true;
+            }
+            catch(EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return false;
         }
     }
 }

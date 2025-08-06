@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CAR_RENTAL.Model.ModalViews.Booking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CAR_RENTAL.Model.ModalViews.Customer
 {
-    internal class CustomerView
+    public class CustomerView
     {
         public int ID   { get; set; }
         public string Name { get; set; }
@@ -21,6 +22,7 @@ namespace CAR_RENTAL.Model.ModalViews.Customer
         public DateTime? CreateDate { get; set; }
         public string CityName { get; set; }
         public string DistrictName { get; set; }
+        public HashSet<BookingView> BookingViews { get; set; }
 
 
     }
