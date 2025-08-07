@@ -31,7 +31,7 @@
                 <RowDefinition Height="71*"/>
             </Grid.RowDefinitions>
             <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="10" Padding="20" Background="White" Grid.RowSpan="3" Grid.ColumnSpan="3">
-                <Button Content="Login by Guest" FontSize="18" Margin="210,240,72,60" Click="LoginByGuest"/>
+                <Button Content="Login by Guest" FontSize="18" Margin="210,243,72,0" Click="LoginByGuest" Height="35" VerticalAlignment="Top"/>
 
 
             </Border>

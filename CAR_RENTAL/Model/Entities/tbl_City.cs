@@ -18,6 +18,7 @@ namespace CAR_RENTAL.Model.Entities
         public tbl_City()
         {
             this.tbl_Customer = new HashSet<tbl_Customer>();
+            this.tbl_Car = new HashSet<tbl_Car>();
         }
     
         public int city_id { get; set; }
@@ -25,5 +26,7 @@ namespace CAR_RENTAL.Model.Entities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Customer> tbl_Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Car> tbl_Car { get; set; }
     }
 }

@@ -47,6 +47,7 @@
           <Property Name="reason_cancel" Type="nvarchar" MaxLength="200" />
           <Property Name="complete_date" Type="date" />
           <Property Name="cancel_date" Type="date" />
+          <Property Name="pickup_method" Type="int" />
         </EntityType>
         <EntityType Name="tbl_Booking_details">
           <Key>
@@ -81,6 +82,9 @@
           <Property Name="color" Type="nvarchar" MaxLength="20" />
           <Property Name="car_type_id" Type="int" />
           <Property Name="active" Type="int" />
+          <Property Name="district_id" Type="int" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tbl_Car_type">
           <Key>
@@ -232,6 +236,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_tbl_Car_City_city_id">
+          <End Role="tbl_City" Type="Self.tbl_City" Multiplicity="0..1" />
+          <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="tbl_Car">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbl_Car_District_district_id">
+          <End Role="tbl_District" Type="Self.tbl_District" Multiplicity="0..1" />
+          <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_District">
+              <PropertyRef Name="district_id" />
+            </Principal>
+            <Dependent Role="tbl_Car">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CAR_RENTALModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
@@ -275,6 +303,14 @@
           <AssociationSet Name="fk_Customer_District_district_id" Association="Self.fk_Customer_District_district_id">
             <End Role="tbl_District" EntitySet="tbl_District" />
             <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbl_Car_City_city_id" Association="Self.fk_tbl_Car_City_city_id">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_Car" EntitySet="tbl_Car" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbl_Car_District_district_id" Association="Self.fk_tbl_Car_District_district_id">
+            <End Role="tbl_District" EntitySet="tbl_District" />
+            <End Role="tbl_Car" EntitySet="tbl_Car" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -325,6 +361,14 @@
             <End Role="tbl_District" EntitySet="tbl_District" />
             <End Role="tbl_Customer" EntitySet="tbl_Customer" />
           </AssociationSet>
+          <AssociationSet Name="fk_tbl_Car_City_city_id" Association="CAR_RENTALModel.fk_tbl_Car_City_city_id">
+            <End Role="tbl_City" EntitySet="tbl_City" />
+            <End Role="tbl_Car" EntitySet="tbl_Car" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbl_Car_District_district_id" Association="CAR_RENTALModel.fk_tbl_Car_District_district_id">
+            <End Role="tbl_District" EntitySet="tbl_District" />
+            <End Role="tbl_Car" EntitySet="tbl_Car" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -371,6 +415,7 @@
           <Property Name="reason_cancel" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="complete_date" Type="DateTime" Precision="0" />
           <Property Name="cancel_date" Type="DateTime" Precision="0" />
+          <Property Name="pickup_method" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_Booking_details">
           <Key>
@@ -410,6 +455,11 @@
           <NavigationProperty Name="tbl_Booking_details" Relationship="CAR_RENTALModel.fk_Booking_details_Car_car_id" FromRole="tbl_Car" ToRole="tbl_Booking_details" />
           <NavigationProperty Name="tbl_Car_type" Relationship="CAR_RENTALModel.fk_Car_Car_type_car_type_id" FromRole="tbl_Car" ToRole="tbl_Car_type" />
           <NavigationProperty Name="tbl_Category" Relationship="CAR_RENTALModel.fk_Car_Category_cate_id" FromRole="tbl_Car" ToRole="tbl_Category" />
+          <Property Name="district_id" Type="Int32" />
+          <Property Name="city_id" Type="Int32" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_City" Relationship="CAR_RENTALModel.fk_tbl_Car_City_city_id" FromRole="tbl_Car" ToRole="tbl_City" />
+          <NavigationProperty Name="tbl_District" Relationship="CAR_RENTALModel.fk_tbl_Car_District_district_id" FromRole="tbl_Car" ToRole="tbl_District" />
         </EntityType>
         <EntityType Name="tbl_Car_type">
           <Key>
@@ -436,6 +486,7 @@
           <Property Name="city_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="city_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_Customer" Relationship="CAR_RENTALModel.fk_Customer_City_city_id" FromRole="tbl_City" ToRole="tbl_Customer" />
+          <NavigationProperty Name="tbl_Car" Relationship="CAR_RENTALModel.fk_tbl_Car_City_city_id" FromRole="tbl_City" ToRole="tbl_Car" />
         </EntityType>
         <EntityType Name="tbl_Customer">
           <Key>
@@ -464,6 +515,7 @@
           <Property Name="district_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_Customer" Relationship="CAR_RENTALModel.fk_Customer_District_district_id" FromRole="tbl_District" ToRole="tbl_Customer" />
           <Property Name="city_id" Type="Int32" />
+          <NavigationProperty Name="tbl_Car" Relationship="CAR_RENTALModel.fk_tbl_Car_District_district_id" FromRole="tbl_District" ToRole="tbl_Car" />
         </EntityType>
         <EntityType Name="tbl_Payment_type">
           <Key>
@@ -569,6 +621,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_tbl_Car_City_city_id">
+          <End Type="CAR_RENTALModel.tbl_City" Role="tbl_City" Multiplicity="0..1" />
+          <End Type="CAR_RENTALModel.tbl_Car" Role="tbl_Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_City">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="tbl_Car">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbl_Car_District_district_id">
+          <End Type="CAR_RENTALModel.tbl_District" Role="tbl_District" Multiplicity="0..1" />
+          <End Type="CAR_RENTALModel.tbl_Car" Role="tbl_Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_District">
+              <PropertyRef Name="district_id" />
+            </Principal>
+            <Dependent Role="tbl_Car">
+              <PropertyRef Name="district_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -602,6 +678,7 @@
           <EntitySetMapping Name="tbl_Booking">
             <EntityTypeMapping TypeName="CAR_RENTALModel.tbl_Booking">
               <MappingFragment StoreEntitySet="tbl_Booking">
+                <ScalarProperty Name="pickup_method" ColumnName="pickup_method" />
                 <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
                 <ScalarProperty Name="complete_date" ColumnName="complete_date" />
                 <ScalarProperty Name="reason_cancel" ColumnName="reason_cancel" />
@@ -642,6 +719,9 @@
           <EntitySetMapping Name="tbl_Car">
             <EntityTypeMapping TypeName="CAR_RENTALModel.tbl_Car">
               <MappingFragment StoreEntitySet="tbl_Car">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="district_id" ColumnName="district_id" />
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="car_type_id" ColumnName="car_type_id" />
                 <ScalarProperty Name="color" ColumnName="color" />

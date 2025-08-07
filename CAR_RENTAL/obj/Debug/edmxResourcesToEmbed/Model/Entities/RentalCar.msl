@@ -28,6 +28,7 @@
     <EntitySetMapping Name="tbl_Booking">
       <EntityTypeMapping TypeName="CAR_RENTALModel.tbl_Booking">
         <MappingFragment StoreEntitySet="tbl_Booking">
+          <ScalarProperty Name="pickup_method" ColumnName="pickup_method" />
           <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
           <ScalarProperty Name="complete_date" ColumnName="complete_date" />
           <ScalarProperty Name="reason_cancel" ColumnName="reason_cancel" />
@@ -68,6 +69,9 @@
     <EntitySetMapping Name="tbl_Car">
       <EntityTypeMapping TypeName="CAR_RENTALModel.tbl_Car">
         <MappingFragment StoreEntitySet="tbl_Car">
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="city_id" ColumnName="city_id" />
+          <ScalarProperty Name="district_id" ColumnName="district_id" />
           <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="car_type_id" ColumnName="car_type_id" />
           <ScalarProperty Name="color" ColumnName="color" />

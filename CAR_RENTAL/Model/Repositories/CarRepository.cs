@@ -7,6 +7,7 @@ using System.Data.Entity.Core;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,10 @@ namespace CAR_RENTAL.Model.Repositories
                 var rs = (from car in en.tbl_Car
                           join cate in en.tbl_Category on car.cate_id equals cate.cate_id
                           join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
+                          join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
+                          from city in cityGroup.DefaultIfEmpty()
+                          join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
+                          from dis in disGroup.DefaultIfEmpty()
                           where car.car_id == id
                           select new CarView
                           {
@@ -52,7 +57,12 @@ namespace CAR_RENTAL.Model.Repositories
                               CarTypeId = car.car_type_id ?? 0,
                               CategoryName = cate.title,
                               CarTypeName = cartype.car_type_name,
-                              Active = car.active ?? 0
+                              Active = car.active ?? 0,
+                              Address = car.address,
+                              CityId = car.city_id ?? 0,
+                              DistrictId = car.district_id ?? 0,
+                              CityName = city.city_name ?? null,
+                              DistrictName = dis.district_name ?? null,
                           }).FirstOrDefault();
                 return rs;
             }
@@ -80,6 +90,9 @@ namespace CAR_RENTAL.Model.Repositories
                     color = entity.Color,
                     car_type_id = entity.CarTypeId,
                     active = entity.Active ?? 0,
+                    address = entity.Address,
+                    city_id = entity.CityId,
+                    district_id = entity.DistrictId
                 };
                 en.tbl_Car.Add(item);
                 en.SaveChanges();
@@ -108,6 +121,9 @@ namespace CAR_RENTAL.Model.Repositories
                 item.color = entity.Color;
                 item.car_type_id = entity.CarTypeId;
                 item.active = entity.Active;
+                item.city_id = entity.CityId;
+                item.district_id = entity.DistrictId;
+                item.address = entity.Address;
                 en.SaveChanges();
                 return true;
             }
@@ -129,6 +145,10 @@ namespace CAR_RENTAL.Model.Repositories
                 var rs = (from car in en.tbl_Car
                           join cate in en.tbl_Category on car.cate_id equals cate.cate_id
                           join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
+                          join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
+                          from city in cityGroup.DefaultIfEmpty()
+                          join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
+                          from dis in disGroup.DefaultIfEmpty()
                           orderby car.car_id descending
                           select new CarView
                           {
@@ -167,6 +187,10 @@ namespace CAR_RENTAL.Model.Repositories
                 var rs = (from car in en.tbl_Car
                           join cate in en.tbl_Category on car.cate_id equals cate.cate_id
                           join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
+                          join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
+                          from city in cityGroup.DefaultIfEmpty()
+                          join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
+                          from dis in disGroup.DefaultIfEmpty()
                           where car.brand.Contains(filter) || car.model.Contains(filter)
                           select new CarView
                           {
@@ -182,7 +206,12 @@ namespace CAR_RENTAL.Model.Repositories
                               CarTypeId = car.car_type_id ?? 0,
                               CategoryName = cate.title,
                               CarTypeName = cartype.car_type_name,
-                              Active = car.active ?? 0
+                              Active = car.active ?? 0,
+                              Address = car.address,
+                              CityId = car.city_id ?? 0,
+                              DistrictId = car.district_id ?? 0,
+                              CityName = city.city_name ?? null,
+                              DistrictName = dis.district_name ?? null,
                           }).ToHashSet();
                 return rs;
             }
@@ -204,6 +233,10 @@ namespace CAR_RENTAL.Model.Repositories
                 var rs = (from car in en.tbl_Car
                           join cate in en.tbl_Category on car.cate_id equals cate.cate_id
                           join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
+                          join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
+                          from city in cityGroup.DefaultIfEmpty()
+                          join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
+                          from dis in disGroup.DefaultIfEmpty()
                           where car.car_status == filter
                           select new CarView
                           {
@@ -219,7 +252,12 @@ namespace CAR_RENTAL.Model.Repositories
                               CarTypeId = car.car_type_id ?? 0,
                               CategoryName = cate.title,
                               CarTypeName = cartype.car_type_name,
-                              Active = car.active ?? 0
+                              Active = car.active ?? 0,
+                              Address = car.address,
+                              CityId = car.city_id ?? 0,
+                              DistrictId = car.district_id ?? 0,
+                              CityName = city.city_name ?? null,
+                              DistrictName = dis.district_name ?? null,
                           }).ToHashSet();
                 return rs;
             }
@@ -237,6 +275,10 @@ namespace CAR_RENTAL.Model.Repositories
                 var rs = (from car in en.tbl_Car
                           join cate in en.tbl_Category on car.cate_id equals cate.cate_id
                           join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
+                          join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
+                          from city in cityGroup.DefaultIfEmpty()
+                          join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
+                          from dis in disGroup.DefaultIfEmpty()
                           select new CarView
                           {
                               ID = car.car_id,
@@ -251,7 +293,12 @@ namespace CAR_RENTAL.Model.Repositories
                               CarTypeId = car.car_type_id ?? 0,
                               CategoryName = cate.title,
                               CarTypeName = cartype.car_type_name,
-                              Active = car.active ?? 0
+                              Active = car.active ?? 0,
+                              Address = car.address,
+                              CityId = car.city_id ?? 0,
+                              DistrictId = car.district_id ?? 0,
+                              CityName = city.city_name ?? null,
+                              DistrictName = dis.district_name ?? null,
                           });
                 if(category != "All")
                 {
@@ -391,6 +438,10 @@ namespace CAR_RENTAL.Model.Repositories
                             join c in en.tbl_Car on rc.CarId equals c.car_id
                             join ctype in en.tbl_Car_type on c.car_type_id equals ctype.car_type_id
                             join cate in en.tbl_Category on c.cate_id equals cate.cate_id
+                            join city in en.tbl_City on c.city_id equals city.city_id into cityGroup
+                            from city in cityGroup.DefaultIfEmpty()
+                            join dis in en.tbl_District on c.district_id equals dis.district_id into disGroup
+                            from dis in disGroup.DefaultIfEmpty()
                             orderby rc.RentCount descending
                             select new CarView
                             {
@@ -408,7 +459,12 @@ namespace CAR_RENTAL.Model.Repositories
                                 CarTypeId = c.car_type_id,
                                 CarTypeName = ctype.car_type_name,
                                 CategoryName = cate.title,
-                                RentCount = rc.RentCount
+                                RentCount = rc.RentCount,
+                                Address = c.address,
+                                CityId = c.city_id ?? 0,
+                                DistrictId = c.district_id ?? 0,
+                                CityName = city.city_name ?? null,
+                                DistrictName = dis.district_name ?? null,
                             }).FirstOrDefault();
                 return item;
             }
@@ -436,6 +492,10 @@ namespace CAR_RENTAL.Model.Repositories
                             join c in en.tbl_Car on rc.CarId equals c.car_id
                             join ctype in en.tbl_Car_type on c.car_type_id equals ctype.car_type_id
                             join cate in en.tbl_Category on c.cate_id equals cate.cate_id
+                            join city in en.tbl_City on c.city_id equals city.city_id into cityGroup
+                            from city in cityGroup.DefaultIfEmpty()
+                            join dis in en.tbl_District on c.district_id equals dis.district_id into disGroup
+                            from dis in disGroup.DefaultIfEmpty()
                             orderby rc.RentCount ascending
                             select new CarView
                             {
@@ -453,7 +513,12 @@ namespace CAR_RENTAL.Model.Repositories
                                 CarTypeId = c.car_type_id,
                                 CarTypeName = ctype.car_type_name,
                                 CategoryName = cate.title,
-                                RentCount = rc.RentCount
+                                RentCount = rc.RentCount,
+                                Address = c.address,
+                                CityId = c.city_id ?? 0,
+                                DistrictId = c.district_id ?? 0,
+                                CityName = city.city_name ?? null,
+                                DistrictName = dis.district_name ?? null,
                             }).FirstOrDefault();
                 return item;
             }

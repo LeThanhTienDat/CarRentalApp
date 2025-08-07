@@ -74,3 +74,12 @@ C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CategoryReport.
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CustomerReport.g.cs
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CategoryReport.baml
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Report\CustomerReport.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\MaterialDesignColors.dll
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\MaterialDesignColors.pdb
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\App.baml

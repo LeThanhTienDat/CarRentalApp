@@ -32,10 +32,15 @@ namespace CAR_RENTAL.Model.Entities
         public string color { get; set; }
         public Nullable<int> car_type_id { get; set; }
         public Nullable<int> active { get; set; }
+        public Nullable<int> district_id { get; set; }
+        public Nullable<int> city_id { get; set; }
+        public string address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Booking_details> tbl_Booking_details { get; set; }
         public virtual tbl_Car_type tbl_Car_type { get; set; }
         public virtual tbl_Category tbl_Category { get; set; }
+        public virtual tbl_City tbl_City { get; set; }
+        public virtual tbl_District tbl_District { get; set; }
     }
 }

@@ -36,6 +36,7 @@ namespace CAR_RENTAL.Model.Entities
         public string reason_cancel { get; set; }
         public Nullable<System.DateTime> complete_date { get; set; }
         public Nullable<System.DateTime> cancel_date { get; set; }
+        public Nullable<int> pickup_method { get; set; }
     
         public virtual tbl_Customer tbl_Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

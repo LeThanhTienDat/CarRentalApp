@@ -43,13 +43,13 @@
             </Grid>
 
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid HorizontalAlignment="Left" Margin="0,214,0,0" Grid.RowSpan="2" Width="750">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="251*"/>
                 <ColumnDefinition Width="249*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Save Edit" Grid.Column="0" Click="btnSaveEdit"></Button>
-            <Button Content="Cancel" Grid.Column="1" Click="btnCancelEdit"></Button>
+            <Button Content="Save Edit" Grid.Column="0" Click="btnSaveEdit" Margin="206,19,28,19"/>
+            <Button Content="Cancel" Click="btnCancelEdit" HorizontalAlignment="Left" Margin="28,19,0,19" Width="158" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>

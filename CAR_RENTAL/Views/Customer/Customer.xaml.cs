@@ -88,6 +88,7 @@ namespace CAR_RENTAL.Views.Customer
                 var checkEmail = CustomerRepository.Instance.IsExistEmail(inputEmail.Text);
                 var checkIdCard = CustomerRepository.Instance.IsExistIdNumber(inputIdCard.Text);
                 var checkPhone = CustomerRepository.Instance.IsExistPhone(inputPhone.Text);
+                var address = inputAddress.Text;
                 if (checkEmail)
                 {
                     MessageBox.Show("Email is exist, please try another email!");
@@ -102,6 +103,10 @@ namespace CAR_RENTAL.Views.Customer
                 {
                     MessageBox.Show("Id Card is exist, please try again!");
                     inputIdCard.Text = "";
+                }
+                else if(address.Length == 0)
+                {
+                    MessageBox.Show("Address must not Empty!");
                 }
                 else
                 {
@@ -225,7 +230,7 @@ namespace CAR_RENTAL.Views.Customer
                 {
                     Button btnPassword = new Button();
                     btnPassword.Content = "Update";
-                    btnPassword.Width = 50;
+                    btnPassword.Width = 80;
                     btnPassword.Click += (object sender, RoutedEventArgs e) =>
                     {
                         MessageBox.Show("Update Password");
@@ -299,7 +304,7 @@ namespace CAR_RENTAL.Views.Customer
                 grItemAction.ColumnDefinitions.Add(colDelete);
                 Button btnEdit = new Button();
                 btnEdit.Content = "Edit";
-                btnEdit.Width = 50;
+                btnEdit.Width = 80;
                 btnEdit.Click += (object sender, RoutedEventArgs e) =>
                 {
                     var showEdit = new CustomerEdit(cus.ID)
@@ -322,7 +327,7 @@ namespace CAR_RENTAL.Views.Customer
                 grItemAction.Children.Add(btnEdit);
                 Button btnDelete = new Button();
                 btnDelete.Content = "Delete";
-                btnDelete.Width = 50;
+                btnDelete.Width = 80;
                 btnDelete.Click += (object sender, RoutedEventArgs e) =>
                 {
                     var confirm = MessageBox.Show($"Are you sure to Delete this User ?", "Confirm Delete",

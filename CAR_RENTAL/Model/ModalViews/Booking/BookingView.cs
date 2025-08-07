@@ -26,6 +26,7 @@ namespace CAR_RENTAL.Model.ModalViews.Booking
         public decimal Refund { get; set; }
         public int IsCancel { set; get; }
         public string ReasonCancel { set; get; }
+        public int? PickupMethod { set; get; }
         public DateTime? CancelDate { set;get; }
         public DateTime? OrderDate { set; get; }
         public DateTime? CompletedDate { set; get; }

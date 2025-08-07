@@ -126,7 +126,7 @@ namespace CAR_RENTAL.Views.Booking
                 foreach (var item in cus)
                 {
                     RowDefinition rowDefinition = new RowDefinition();
-                    rowDefinition.Height = new GridLength(25);
+                    rowDefinition.Height = new GridLength(50);
                     Customers.RowDefinitions.Add(rowDefinition);
                     BrushConverter bc = new BrushConverter();
                     Brush rowBackground = Brushes.White;
@@ -139,7 +139,7 @@ namespace CAR_RENTAL.Views.Booking
                     tbItemId.VerticalAlignment = VerticalAlignment.Center;
                     tbItemId.TextAlignment = TextAlignment.Center;
                     brItemId.Child = tbItemId;
-                    brItemId.Height = 25;
+                    brItemId.Height = 50;
                     Grid.SetColumn(brItemId, 0);
                     Grid.SetRow(brItemId, index);
                     Customers.Children.Add(brItemId);
@@ -151,7 +151,7 @@ namespace CAR_RENTAL.Views.Booking
                     tbItemName.TextAlignment = TextAlignment.Center;
                     tbItemName.VerticalAlignment = VerticalAlignment.Center;
                     brItemName.Child= tbItemName;
-                    brItemName.Height = 25;
+                    brItemName.Height = 50;
                     Grid.SetColumn(brItemName, 1);
                     Grid.SetRow(brItemName, index);
                     Customers.Children.Add(brItemName);
@@ -174,10 +174,10 @@ namespace CAR_RENTAL.Views.Booking
                         LoadBookingDetails(IdCusChosen);
                         LoadBookings(item.Name);
                     };
-                    btnItemAction.Height = 25;
-                    btnItemAction.Width = 50;
+                    btnItemAction.Height = 30;
+                    btnItemAction.Width = 80;
                     brItemAction.Child = btnItemAction;
-                    brItemAction.Height = 25;
+                    brItemAction.Height = 50;
                     Grid.SetColumn(brItemAction, 2);
                     Grid.SetRow(brItemAction, index);
                     Customers.Children.Add(brItemAction);
@@ -321,7 +321,7 @@ namespace CAR_RENTAL.Views.Booking
                     btnChose.Content = "Chose";
                     btnChose.FontSize = 16;
                     btnChose.Height = 35;
-                    btnChose.Width = 70;
+                    btnChose.Width = 100;
                     btnChose.Click += (object sender, RoutedEventArgs e) =>
                     {
                         RemoveCarUpdateInfo();
@@ -330,6 +330,7 @@ namespace CAR_RENTAL.Views.Booking
                         IdCarChosen = car.ID;                      
                         showModel.Text = car.Model;
                         showSeatCount.Text = car.SeatCount.ToString();
+                        showCarAddress.Text = (car.Address + (car.DistrictName != null ? ", " : "") + car.DistrictName + ", " + car.CityName);
                         var showPrice = car.PricePerDay;
                         string  showPriceFormatted = showPrice.ToString("C0", CultureInfo.GetCultureInfo("vi-VN"));
                         showPricePerDay.Text = showPriceFormatted + "/Ngày";
@@ -468,6 +469,8 @@ namespace CAR_RENTAL.Views.Booking
             setBooking.CusId = IdCusChosen;
             setBooking.BookingStatus = "Waiting";
             setBooking.OrderDate = DateTime.Now;
+            ComboBoxItem slPickupMethod = inputPickupMethod.SelectedItem as ComboBoxItem;
+            setBooking.PickupMethod = Convert.ToInt32(slPickupMethod.Tag);
             setBooking.Paid = 0;
             if (!string.IsNullOrEmpty(inputDiscount.Text))
             {
@@ -719,7 +722,7 @@ namespace CAR_RENTAL.Views.Booking
                     Button btnEdit = new Button();
                     btnEdit.Content = "Edit";
                     btnEdit.Height = 25;
-                    btnEdit.Width = 50;
+                    btnEdit.Width = 60;
                     btnEdit.Click += (object sender, RoutedEventArgs e) =>
                     {                       
                         btnSaveCarUpdate.IsEnabled = true;
@@ -741,9 +744,9 @@ namespace CAR_RENTAL.Views.Booking
                     grItemAction.Children.Add(btnEdit);
                         //btnRemove
                     Button btnRemove = new Button();
-                    btnRemove.Content = "Remove";
+                    btnRemove.Content = "Del";
                     btnRemove.Height = 25;
-                    btnRemove.Width = 50;
+                    btnRemove.Width = 60;
                     btnRemove.Click += (object sender, RoutedEventArgs e) =>
                     {
                         IdCusChosen = Convert.ToInt32(showIdCus.Text);
@@ -946,7 +949,7 @@ namespace CAR_RENTAL.Views.Booking
                     Button btnEdit = new Button();
                     btnEdit.Content = "Edit";
                     btnEdit.Height = 25;
-                    btnEdit.Width = 50;
+                    btnEdit.Width = 60;
                     btnEdit.Click += (object sender, RoutedEventArgs e) =>
                     {
                         EditBooking(item.ID, item.CusId);
@@ -961,7 +964,7 @@ namespace CAR_RENTAL.Views.Booking
                     Button btnComplete = new Button();
                     btnComplete.Content = "Complete";
                     btnComplete.Height = 25;
-                    btnComplete.Width = 60;
+                    btnComplete.Width = 80;
                     btnComplete.Click += (object sender, RoutedEventArgs e) =>
                     {
                         var getCarNotReturn = BookingDetailsRepository.Instance.FindAllNotReturn(item.ID);
@@ -993,7 +996,7 @@ namespace CAR_RENTAL.Views.Booking
                     Button btnCancel = new Button();
                     btnCancel.Content = "Cancel";
                     btnCancel.Height = 25;
-                    btnCancel.Width = 60;
+                    btnCancel.Width = 80;
                     btnCancel.Background = backgroundCancelBtn;
                     btnCancel.Click += (object sender, RoutedEventArgs e) =>
                     {
@@ -1048,6 +1051,7 @@ namespace CAR_RENTAL.Views.Booking
                 btnSaveBookingUpdate.IsEnabled = true;
                 showIdCus.Text = info.CusId.ToString();
                 showName.Text = info.CustomerView.Name;
+                
                 var paymentType = PaymentTypeRepository.Instance.GetAll();
                 
                 foreach (ComboBoxItem item in inputPayment.Items)
@@ -1077,7 +1081,13 @@ namespace CAR_RENTAL.Views.Booking
                 {
                     inputDiscount.Text = info.Discount.ToString();
                 }
-                
+                foreach(ComboBoxItem item in inputPickupMethod.Items)
+                {
+                    if(info.PickupMethod == Convert.ToInt32(item.Tag))
+                    {
+                        inputPickupMethod.SelectedIndex = Convert.ToInt32(item.Tag);
+                    }
+                }
                 CarsChosen.RowDefinitions.Clear();
                 CarsChosen.Children.Clear();
                 LoadBookingDetails(info.CusId);
@@ -1112,6 +1122,8 @@ namespace CAR_RENTAL.Views.Booking
                     int paymentTypeId = Convert.ToInt32(tagValue);
                     item.PaymentTypeId = paymentTypeId;
                 }
+                ComboBoxItem slPickUp = inputPickupMethod.SelectedItem as ComboBoxItem;
+                item.PickupMethod = Convert.ToInt32(slPickUp.Tag);
                 var checkUpdate = BookingRepository.Instance.Update(item);
                 if (checkUpdate)
                 {
@@ -1142,8 +1154,14 @@ namespace CAR_RENTAL.Views.Booking
             {
                 var item = new BookingDetailsView();
                 item.ID = IdBookingDetails;
-                item.StartDate = inputStartDate.SelectedDate;
-                item.EndDate = inputEndDate.SelectedDate;
+                if(inputStartDate.SelectedDate != null)
+                {
+                    item.StartDate = inputStartDate.SelectedDate;
+                }
+                if(inputEndDate.SelectedDate != null)
+                {
+                    item.EndDate = inputEndDate.SelectedDate;
+                }
                 item.PricePerCar = decimal.Parse(showTotalPerCar.Text.Substring(0, showTotalPerCar.Text.Length - 4));
                 if(inputReturnDate.SelectedDate != null)
                 {

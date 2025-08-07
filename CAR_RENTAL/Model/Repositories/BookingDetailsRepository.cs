@@ -136,8 +136,14 @@ namespace CAR_RENTAL.Model.Repositories
             {
                 DbCarRental en = new DbCarRental();
                 var item = en.tbl_Booking_details.Where(d => d.booking_details_id == entity.ID).FirstOrDefault();
-                item.start_date = entity.StartDate;
-                item.end_date = entity.EndDate;
+                if(entity.StartDate != null)
+                {
+                    item.start_date = entity.StartDate;
+                }
+                if(entity.EndDate != null)
+                {
+                    item.end_date = entity.EndDate;
+                }
                 item.price_per_car = entity.PricePerCar;
                 if(entity.ActualReturnDate != null)
                 {

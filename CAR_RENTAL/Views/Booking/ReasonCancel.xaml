@@ -24,8 +24,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm Cancel" HorizontalAlignment="Left" Margin="57,10,0,0" VerticalAlignment="Top" Height="38" Width="133" FontSize="16" Click="ConfirmCancel"/>
-            <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="38" Width="133" FontSize="16" Grid.Column="1" Click="StopCancel"/>
+            <Button Content="Confirm Cancel" HorizontalAlignment="Left" Margin="39,10,0,0" VerticalAlignment="Top" Height="38" Width="151" FontSize="16" Click="ConfirmCancel"/>
+            <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="38" Width="151" FontSize="16" Grid.Column="1" Click="StopCancel"/>
 
         </Grid>
         <Label Content="Reason cancel" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="178" FontSize="22" HorizontalContentAlignment="Center" Height="48"/>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CAR_RENTAL.Model.Repositories;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,25 @@ namespace CAR_RENTAL.Views.Report
         public CategoryReport()
         {
             InitializeComponent();
+            LoadCategoryReport();
+        }
+        private void LoadCategoryReport()
+        {
+            try
+            {
+                var items = CategoryRepository.Instance.GetAll();
+                showTotalCate.Text = items.Count.ToString();
+
+                var itemsActive = CategoryRepository.Instance.CountByStatus("Active");
+                showTotalActive.Text = itemsActive.Count.ToString();
+
+                var itemsDeactive = CategoryRepository.Instance.CountByStatus("Deactive");
+                showTotalDeactive.Text = itemsDeactive.Count.ToString();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }

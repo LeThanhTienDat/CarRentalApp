@@ -135,7 +135,26 @@ namespace CAR_RENTAL.Model.Repositories
             return new HashSet<CategoryView>();
         }
 
-
+        //Query Report
+        public HashSet<CategoryView> CountByStatus(string status)
+        {
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var item = (from cate in en.tbl_Category
+                            where cate.active == (status == "Active" ? 1 : 0)
+                            select new CategoryView
+                            {
+                                ID = cate.cate_id
+                            }).ToHashSet();
+                return item;
+            }
+            catch(EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return new HashSet<CategoryView>();
+        }
 
 
     }

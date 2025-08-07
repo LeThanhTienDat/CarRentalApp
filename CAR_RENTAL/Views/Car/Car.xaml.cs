@@ -48,9 +48,54 @@ namespace CAR_RENTAL.Views.Car
                 CbCateList.Items.Add(cateItem);
                 CbCateList.SelectedIndex = 0;
             }
+            var cityList = CityRepository.Instance.GetAll();
+            foreach (var city in cityList)
+            {
+                ComboBoxItem cbCityList = new ComboBoxItem();
+                cbCityList.Content = city.Name;
+                cbCityList.Tag = city.ID;
+                inputCityId.Items.Add(cbCityList);
+                inputCityId.SelectedIndex = 0;
+            }
+            var selectedCity = inputCityId.SelectedItem as ComboBoxItem;
+            if (selectedCity != null)
+            {
+                var cityId = Convert.ToInt32(selectedCity.Tag);
+                LoadDistrict(cityId);
+            }
             LoadCars();
         }
+        private void inputCityId_changed(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItem = inputCityId.SelectedItem as ComboBoxItem;
+            if (selectedItem != null)
+            {
+                int cityId = Convert.ToInt32(selectedItem.Tag);
+                LoadDistrict(cityId);
+            }
+        }
+        public void LoadDistrict(int cityId)
+        {
+            var districtList = DistrictRepository.Instance.FindByCityId(cityId);
+            inputDistrictId.Items.Clear();
+            if (districtList.Count == 0)
+            {
 
+                inputDistrictId.IsEnabled = false;
+            }
+            else
+            {
+                inputDistrictId.IsEnabled = true;
+                foreach (var district in districtList)
+                {
+                    ComboBoxItem cbDistList = new ComboBoxItem();
+                    cbDistList.Content = district.Name;
+                    cbDistList.Tag = district.ID;
+                    inputDistrictId.Items.Add(cbDistList);
+                    inputDistrictId.SelectedIndex = 0;
+                }
+            }
+        }
         private void uploadCarImg(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -84,6 +129,12 @@ namespace CAR_RENTAL.Views.Car
                 item.CarTypeId = Convert.ToInt32(slCarType.Tag);
                 item.Image = carImg;
                 item.Active = inputActive.IsChecked == true ? 1 : 0;
+                item.Address = inputAddress.Text;
+                ComboBoxItem slCityId = inputCityId.SelectedItem as ComboBoxItem;
+                item.CityId = Convert.ToInt32(slCityId.Tag);
+                ComboBoxItem slDistrictId = inputDistrictId.SelectedItem as ComboBoxItem;
+                item.DistrictId = Convert.ToInt32(slDistrictId.Tag);
+
 
                 //Handle store image into folder
                 string imagesFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
@@ -108,6 +159,7 @@ namespace CAR_RENTAL.Views.Car
                     inputLicensePlate.Text = "";
                     getCarImg.Source = null;
                     inputSeatCount.Text = "";
+                    inputAddress.Text = "";
 
                     Cars.RowDefinitions.Clear();
                     Cars.Children.Clear();
@@ -370,6 +422,6 @@ namespace CAR_RENTAL.Views.Car
             }
         }
 
-       
+        
     }
 }

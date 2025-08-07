@@ -294,6 +294,7 @@ namespace CAR_RENTAL.Model.Repositories
                     }
                     itemUpdate.payment_type_id = entity.PaymentTypeId;
                     itemUpdate.deposit_cash_has_paid = entity.DepositHasPaid;
+                    itemUpdate.pickup_method = entity.PickupMethod;
                     en.SaveChanges();
                     return true;
                 }

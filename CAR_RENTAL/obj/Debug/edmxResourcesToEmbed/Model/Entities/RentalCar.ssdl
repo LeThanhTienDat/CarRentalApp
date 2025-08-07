@@ -42,6 +42,7 @@
     <Property Name="reason_cancel" Type="nvarchar" MaxLength="200" />
     <Property Name="complete_date" Type="date" />
     <Property Name="cancel_date" Type="date" />
+    <Property Name="pickup_method" Type="int" />
   </EntityType>
   <EntityType Name="tbl_Booking_details">
     <Key>
@@ -76,6 +77,9 @@
     <Property Name="color" Type="nvarchar" MaxLength="20" />
     <Property Name="car_type_id" Type="int" />
     <Property Name="active" Type="int" />
+    <Property Name="district_id" Type="int" />
+    <Property Name="city_id" Type="int" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="tbl_Car_type">
     <Key>
@@ -227,6 +231,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tbl_Car_City_city_id">
+    <End Role="tbl_City" Type="Self.tbl_City" Multiplicity="0..1" />
+    <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_City">
+        <PropertyRef Name="city_id" />
+      </Principal>
+      <Dependent Role="tbl_Car">
+        <PropertyRef Name="city_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tbl_Car_District_district_id">
+    <End Role="tbl_District" Type="Self.tbl_District" Multiplicity="0..1" />
+    <End Role="tbl_Car" Type="Self.tbl_Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_District">
+        <PropertyRef Name="district_id" />
+      </Principal>
+      <Dependent Role="tbl_Car">
+        <PropertyRef Name="district_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CAR_RENTALModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
@@ -270,6 +298,14 @@
     <AssociationSet Name="fk_Customer_District_district_id" Association="Self.fk_Customer_District_district_id">
       <End Role="tbl_District" EntitySet="tbl_District" />
       <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tbl_Car_City_city_id" Association="Self.fk_tbl_Car_City_city_id">
+      <End Role="tbl_City" EntitySet="tbl_City" />
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tbl_Car_District_district_id" Association="Self.fk_tbl_Car_District_district_id">
+      <End Role="tbl_District" EntitySet="tbl_District" />
+      <End Role="tbl_Car" EntitySet="tbl_Car" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

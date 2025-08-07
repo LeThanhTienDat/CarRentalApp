@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0c60208cdd044a7c9799cd6572ad55ac" Name="Diagram1">
-        <EntityTypeShape EntityType="CAR_RENTALModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CAR_RENTALModel.sysdiagram" Width="1.5" PointX="5.75" PointY="6.25" />
         <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Admin" Width="1.5" PointX="7.75" PointY="5.75" />
         <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Booking" Width="1.5" PointX="5.25" PointY="1.375" />
         <EntityTypeShape EntityType="CAR_RENTALModel.tbl_Booking_details" Width="2" PointX="7.5" PointY="1.125" />
@@ -24,6 +24,8 @@
         <AssociationConnector Association="CAR_RENTALModel.fk_Car_Category_cate_id" />
         <AssociationConnector Association="CAR_RENTALModel.fk_Customer_City_city_id" />
         <AssociationConnector Association="CAR_RENTALModel.fk_Customer_District_district_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_tbl_Car_City_city_id" />
+        <AssociationConnector Association="CAR_RENTALModel.fk_tbl_Car_District_district_id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

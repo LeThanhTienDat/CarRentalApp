@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="183*"/>
                 <ColumnDefinition Width="216*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSaveComplete" Grid.Column="1" Content="Complete Booking" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Height="43" Width="156" Click="SaveComplete"/>
+            <Button x:Name="btnSaveComplete" Grid.Column="1" Content="Complete Booking" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Height="43" Width="168" Click="SaveComplete"/>
             <Button x:Name="btnSaveComplete_Copy" Grid.Column="2" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Height="43" Width="156" Margin="10,0,0,0" Click="CancelComplete"/>
         </Grid>
         <Grid Grid.Row="0">

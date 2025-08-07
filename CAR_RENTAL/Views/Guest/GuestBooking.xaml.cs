@@ -172,7 +172,7 @@ namespace CAR_RENTAL.Views.Guest
                         btnItemDetail.Content = "View Detail";
                         btnItemDetail.VerticalAlignment = VerticalAlignment.Center;
                         btnItemDetail.HorizontalAlignment = HorizontalAlignment.Center;
-                        btnItemDetail.Width = 90;
+                        btnItemDetail.Width = 120;
                         btnItemDetail.FontSize = 16;
                         btnItemDetail.Click += (object sender, RoutedEventArgs e) =>
                         {

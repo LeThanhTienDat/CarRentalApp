@@ -12,6 +12,6 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <Image x:Name="showCarImg" HorizontalAlignment="Left" Height="202" Margin="10,10,0,0" VerticalAlignment="Top" Width="277"/>
-        <Button Content="Close" Grid.Row="1" Height="25" Width="50" Click="btnCloseShowImg"></Button>
+        <Button Content="Close" Grid.Row="1" Click="btnCloseShowImg" Margin="101,10,101,18"/>
     </Grid>
 </Window>
