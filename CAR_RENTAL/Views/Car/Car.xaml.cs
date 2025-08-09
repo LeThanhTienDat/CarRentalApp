@@ -406,9 +406,29 @@ namespace CAR_RENTAL.Views.Car
                 grItemAction.Children.Add(btnEdit);
                 Button btnDelete = new Button();
                 btnDelete.Content = "Delete";
+                btnDelete.IsEnabled = false;
                 btnDelete.Click += (object sender, RoutedEventArgs e) =>
                 {
-                    MessageBox.Show(car.ID.ToString());
+                    if (car.CarStatus.Equals("Booked"))
+                    {
+                        MessageBox.Show("This car has been booked, can't delete this time, try again later!");
+                    }
+                    else
+                    {
+                        var confirm = MessageBox.Show("Are you sure to delete this car ?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (confirm == MessageBoxResult.Yes)
+                        {
+                            var checkDel = CarRepository.Instance.Delete(car);
+                            if (checkDel)
+                            {
+                                MessageBox.Show("Delete successful!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("There are some error when trying delete, please try again!");
+                            }
+                        }
+                    }
                 };
                 Grid.SetColumn(btnDelete, 1);
                 grItemAction.Children.Add(btnDelete);

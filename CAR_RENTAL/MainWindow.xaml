@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CAR_RENTAL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1500"
+        Title="Car Rental" Height="700" Width="1500"
         WindowStartupLocation="CenterScreen"
         >
     <Grid>

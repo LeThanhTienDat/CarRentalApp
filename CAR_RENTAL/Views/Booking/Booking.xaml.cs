@@ -1085,7 +1085,7 @@ namespace CAR_RENTAL.Views.Booking
                 {
                     if(info.PickupMethod == Convert.ToInt32(item.Tag))
                     {
-                        inputPickupMethod.SelectedIndex = Convert.ToInt32(item.Tag);
+                        inputPickupMethod.SelectedItem = item;
                     }
                 }
                 CarsChosen.RowDefinitions.Clear();

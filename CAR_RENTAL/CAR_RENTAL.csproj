@@ -98,6 +98,7 @@
     <Compile Include="Model\Entities\tbl_District.cs">
       <DependentUpon>RentalCar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ModalViews\Admin\AdminValidate.cs" />
     <Compile Include="Model\ModalViews\Admin\AdminView.cs" />
     <Compile Include="Model\ModalViews\BookingDetails\BookingDetailsView.cs" />
     <Compile Include="Model\ModalViews\Booking\BookingView.cs" />

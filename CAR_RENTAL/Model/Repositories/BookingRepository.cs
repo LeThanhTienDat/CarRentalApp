@@ -197,6 +197,7 @@ namespace CAR_RENTAL.Model.Repositories
                                      PaymentConfirm = d.b.payment_confirm ?? 0,
                                      IsCancel = d.b.is_cancel ?? 0,
                                      ReasonCancel = d.b.reason_cancel,
+                                     PickupMethod = d.b.pickup_method,
                                      CustomerView = new ModalViews.Customer.CustomerView
                                      {
                                          Name = d.cus != null ? d.cus.name : null,

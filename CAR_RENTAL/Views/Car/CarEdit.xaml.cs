@@ -140,6 +140,10 @@ namespace CAR_RENTAL.Views.Car
             string imagePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", rs.Image);
             editCarImg.Source = new BitmapImage(new Uri(imagePath));
             editActive.IsChecked = rs.Active == 1 ? true : false;
+            if (rs.CarStatus.Equals("Booked"))
+            {
+                editActive.IsEnabled = false;
+            }                      
         }
         private void EditCityId_changed(object sender, SelectionChangedEventArgs e)
         {

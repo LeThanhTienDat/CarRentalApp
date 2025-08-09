@@ -1,5 +1,6 @@
 ﻿using CAR_RENTAL.Components;
 using CAR_RENTAL.Helper;
+using CAR_RENTAL.Model.ModalViews.Admin;
 using CAR_RENTAL.Model.Repositories;
 using CAR_RENTAL.Views.Admin;
 using System;

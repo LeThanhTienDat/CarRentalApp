@@ -135,6 +135,21 @@ namespace CAR_RENTAL.Model.Repositories
         }
         public bool Delete(CarView entity)
         {
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var item = en.tbl_Car.Where(d => d.car_id == entity.ID).FirstOrDefault();
+                if(item != null)
+                {
+                    en.tbl_Car.Remove(item);
+                    en.SaveChanges();
+                    return true;
+                }
+            }
+            catch(EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             return false;
         }
         public HashSet<CarView> GetAll()
@@ -191,7 +206,11 @@ namespace CAR_RENTAL.Model.Repositories
                           from city in cityGroup.DefaultIfEmpty()
                           join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
                           from dis in disGroup.DefaultIfEmpty()
-                          where car.brand.Contains(filter) || car.model.Contains(filter)
+                          where car.brand.Contains(filter) || 
+                                car.model.Contains(filter) || 
+                                car.address.Contains(filter) || 
+                                dis.district_name.Contains(filter) ||
+                                city.city_name.Contains(filter)
                           select new CarView
                           {
                               ID = car.car_id,

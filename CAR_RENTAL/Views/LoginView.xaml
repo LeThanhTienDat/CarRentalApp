@@ -31,7 +31,7 @@
                 <RowDefinition Height="71*"/>
             </Grid.RowDefinitions>
             <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="10" Padding="20" Background="White" Grid.RowSpan="3" Grid.ColumnSpan="3">
-                <Button Content="Login by Guest" FontSize="18" Margin="210,243,72,0" Click="LoginByGuest" Height="35" VerticalAlignment="Top"/>
+                <Button Grid.Column="1" Grid.Row="2" Content="Login by Guest" FontSize="18" Margin="210,293,73,0" Click="LoginByGuest" Height="35" VerticalAlignment="Top"/>
 
 
             </Border>
@@ -39,8 +39,8 @@
             <Label Content="Email" HorizontalAlignment="Left" Margin="84,0,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="18" Width="96" Grid.ColumnSpan="2" Height="34"/>
             <Label Content="Password" HorizontalAlignment="Left" Margin="1,87,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="18" Width="95" Height="34" Grid.Column="1"/>
             <PasswordBox x:Name="inputPassword" Grid.Column="1" Grid.Row="1"  Width="317" Height="33" FontSize="18" Margin="0,121,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button x:Name="btnLogin" IsDefault="true" Content="Login" Grid.Column="1" Margin="10,10,207,25" Grid.Row="2" FontSize="18" Click="Login"/>
-            <Button Content="Forgot Password ?" Grid.Column="1" Grid.Row="2" FontSize="18" Margin="147,10,10,25" Click="GetForgotPassword"/>
+            <Button x:Name="btnLogin" IsDefault="true" Content="Login" Grid.Column="1" Margin="5,170,186,0" Grid.Row="1" FontSize="18" Click="Login" Height="35" VerticalAlignment="Top"/>
+            <Button Content="Forgot Password ?" Grid.Column="1" Grid.Row="1" FontSize="18" Margin="147,170,10,0" Click="GetForgotPassword" Height="35" VerticalAlignment="Top"/>
             <Label Grid.Column="1" Content="Welcome" HorizontalAlignment="Center" VerticalAlignment="Center" Width="328" FontSize="30" HorizontalContentAlignment="Center"/>
 
 
