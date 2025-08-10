@@ -4,6 +4,8 @@ using CAR_RENTAL.Model.ModalViews.Car;
 using CAR_RENTAL.Model.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CAR_RENTAL.Views.Car
 {
@@ -27,9 +30,30 @@ namespace CAR_RENTAL.Views.Car
     {
         public string ImagePath = "";
         public string carImg = "";
+        private bool _isLoaded = false;
+        private DispatcherTimer _typingTimer;
+        private TextBox _lastChangedTextBox;
+        public string[] titles =
+            {
+                "Brand", "Model", "Color", "License plate", "Seat count","Status","Category","Type","Price per Day"
+            };
         public Car()
         {
             InitializeComponent();
+            _typingTimer = new DispatcherTimer();
+            _typingTimer.Interval = TimeSpan.FromMilliseconds(500);
+            _typingTimer.Tick += TypingTimer_Tick;
+
+            filterBrand.TextChanged += FilterBox_TextChanged;
+            filterModel.TextChanged += FilterBox_TextChanged;
+            filterColor.TextChanged += FilterBox_TextChanged;
+            filterLicensePlate.TextChanged += FilterBox_TextChanged;
+            filterSeatCount.TextChanged += FilterBox_TextChanged;
+            filterStatus.TextChanged += FilterBox_TextChanged;
+            filterCategory.TextChanged += FilterBox_TextChanged;
+            filterCarType.TextChanged += FilterBox_TextChanged;
+            filterPrice.TextChanged += FilterBox_TextChanged;
+            _isLoaded = true;
             var carTypeList = CarTypeRepository.Instance.GetAll();
             foreach (var car in carTypeList)
             {
@@ -176,10 +200,65 @@ namespace CAR_RENTAL.Views.Car
         }
         public void LoadCars()
         {
-            
-
             //Load car list
-            var carList = CarRepository.Instance.GetAll();           
+            HashSet<CarView> carList = null;
+            var checktitle = 0;           
+            if( titles.Contains(filterBrand.Text) &&
+                titles.Contains(filterModel.Text) &&
+                titles.Contains(filterColor.Text) &&
+                titles.Contains(filterLicensePlate.Text) &&
+                titles.Contains(filterSeatCount.Text) &&
+                titles.Contains(filterStatus.Text) &&
+                titles.Contains(filterCategory.Text) &&
+                titles.Contains(filterCarType.Text) &&
+                titles.Contains(filterPrice.Text)
+                )
+            {
+                checktitle = 1;
+            }
+            if( checktitle == 0)
+            {
+                decimal? priceParam = null;
+                int? seatCount = null;
+                bool seatValid = int.TryParse(filterSeatCount.Text, out int seat);
+                bool priceValid = decimal.TryParse(filterPrice.Text, out decimal price);
+                if (seatValid)
+                {
+                    seatCount = seat;
+                }
+                else
+                {
+                    seatCount = null;
+                }
+                if( priceValid )
+                {
+                    priceParam = price;
+                }
+                else
+                {
+                    priceParam = null;
+                }
+                    carList = CarRepository.Instance.GetAll(
+                                                           !titles.Contains(filterBrand.Text) ? filterBrand.Text : null,
+                                                           !titles.Contains(filterModel.Text) ? filterModel.Text : null,
+                                                           !titles.Contains(filterColor.Text) ? filterColor.Text : null,
+                                                           !titles.Contains(filterLicensePlate.Text) ? filterLicensePlate.Text : null,
+                                                           seatCount,
+                                                           !titles.Contains(filterStatus.Text) ? filterStatus.Text : null,
+                                                           !titles.Contains(filterCategory.Text) ? filterCategory.Text : null,
+                                                           !titles.Contains(filterCarType.Text) ? filterCarType.Text : null,
+                                                           priceParam
+                                                           );
+                
+            }else if(checktitle == 1)
+            {
+                carList = CarRepository.Instance.GetAll(null, null, null, null, null, null, null, null, null);
+            }
+            if(Cars != null)
+            {
+                Cars.RowDefinitions.Clear();
+                Cars.Children.Clear();
+            }
             var index = 0;
             foreach( var car in carList)
             {
@@ -346,9 +425,41 @@ namespace CAR_RENTAL.Views.Car
                 MyCheckBox cbItemActive = new MyCheckBox();
                 cbItemActive.IsChecked = car.Active == 1 ? true : false;
                 cbItemActive.ValuePrimaryKey = car.ID;
+                if (car.CarStatus.Equals("Booked"))
+                {
+                    cbItemActive.IsEnabled = false;
+                }
                 cbItemActive.HorizontalAlignment = HorizontalAlignment.Center;
                 cbItemActive.VerticalAlignment=VerticalAlignment.Center;
-                cbItemActive.IsEnabled = false;
+                cbItemActive.Click +=  (object sender, RoutedEventArgs e) =>
+                {
+                    var item = new CarView();
+                    item.ID = car.ID;
+                    var newActive = cbItemActive.IsChecked;
+                    if (newActive == true)
+                    {
+                        item.Active = 1;                       
+                    }
+                    else
+                    {
+                        item.Active = 0;
+                    }
+                    var check = CarRepository.Instance.UpdateActive(item);
+                    if (check)
+                    {
+                        MessageBox.Show("Change status success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("There are some error, please try again!");
+                    }
+                    if(Cars != null)
+                    {
+                        Cars.Children.Clear();
+                        Cars.RowDefinitions.Clear();
+                    }
+                    LoadCars();
+                };
                 brItemActive.Child = cbItemActive;
                 brItemActive.Height = 25;
                 brItemActive.Background = rowBackground;
@@ -442,6 +553,132 @@ namespace CAR_RENTAL.Views.Car
             }
         }
 
+        public void AddCarType(object sender, RoutedEventArgs e)
+        {
+            Window showAddCarType = new Views.Car.AddCarType();
+            bool? checkAddCarType = showAddCarType.ShowDialog();
+            if(checkAddCarType == true)
+            {
+                MessageBox.Show("Add Car Type successful!");
+                var carTypeList = CarTypeRepository.Instance.GetAll();
+                if(CbCarType.Items != null)
+                {
+                    CbCarType.Items.Clear();
+                }
+                foreach (var car in carTypeList)
+                {
+                    ComboBoxItem carTypeItem = new ComboBoxItem();
+                    carTypeItem.Content = car.Name;
+                    carTypeItem.Tag = car.ID;
+                    CbCarType.Items.Add(carTypeItem);
+                    CbCarType.SelectedIndex = 0;
+                }               
+            }
+            else
+            {
+                MessageBox.Show("There are some error when create new Type, please try again!");
+            }
+        }
+        public void AddCategory(object sender, RoutedEventArgs e)
+        {
+            Window showAddCategory = new Views.Car.AddCategory();
+            bool? checkAddCategory = showAddCategory.ShowDialog();
+            if(checkAddCategory == true)
+            {
+                MessageBox.Show("Add category successful!");
+                var categoryList = CategoryRepository.Instance.GetAll();
+                if(CbCateList.Items != null)
+                {
+                    CbCateList.Items.Clear();
+                }
+                foreach (var item in categoryList)
+                {
+                    ComboBoxItem cateItem = new ComboBoxItem();
+                    cateItem.Content = item.Title;
+                    cateItem.Tag = item.ID;
+                    CbCateList.Items.Add(cateItem);
+                    CbCateList.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                MessageBox.Show("There are some error when create new Category, please try again!");
+            }
+        }
+
+        public void FilterBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            
+            TextBox tb = sender as TextBox;
+            if (tb != null && !string.IsNullOrEmpty(tb.Text))
+            {               
+                if(titles.Contains(tb.Text))
+                {
+                    tb.Text = "";
+                }      
+            }
         
+        }
+        public void FilterBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if(tb.Text.Length == 0)
+            {
+                switch (tb.Name)
+                {
+                    case "filterBrand":
+                        tb.Text = "Brand";                       
+                        break;
+                    case "filterModel":
+                        tb.Text = "Model";
+                        break;
+                    case "filterColor":
+                        tb.Text = "Color";
+                        break;
+                    case "filterLicensePlate":
+                        tb.Text = "License plate";
+                        break;
+                    case "filterSeatCount":
+                        tb.Text = "Seat count";
+                        break;
+                    case "filterStatus":
+                        tb.Text = "Status";
+                        break;
+                    case "filterCategory":
+                        tb.Text = "Category";
+                        break;
+                    case "filterCarType":
+                        tb.Text = "Type";
+                        break;
+                    case "filterPrice":
+                        tb.Text = "Price per Day";
+                        break;
+                }
+                LoadCars();
+            }          
+        }
+        public void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_isLoaded)
+            {
+                return;
+            }
+            _lastChangedTextBox = sender as TextBox;
+            _typingTimer.Stop();
+            _typingTimer.Start();           
+        }
+        
+        private void TypingTimer_Tick(object sender, EventArgs e)
+        {
+            _typingTimer.Stop();
+            if(_lastChangedTextBox != null )
+            {
+                var tb = _lastChangedTextBox;               
+                if (!string.IsNullOrEmpty(tb.Text) && !titles.Contains(tb.Text))
+                {
+                    LoadCars();
+                }
+            }
+        }
     }
 }

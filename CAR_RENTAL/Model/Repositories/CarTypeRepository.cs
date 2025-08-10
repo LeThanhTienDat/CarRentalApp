@@ -32,7 +32,21 @@ namespace CAR_RENTAL.Model.Repositories
         }
         public void Create(CarTypeView entity)
         {
-
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var item = new tbl_Car_type
+                {
+                    car_type_name = entity.Name,
+                };
+                en.tbl_Car_type.Add(item);
+                en.SaveChanges();
+                entity.ID = item.car_type_id;
+            }
+            catch(EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
         public bool Update(CarTypeView entity)
         {

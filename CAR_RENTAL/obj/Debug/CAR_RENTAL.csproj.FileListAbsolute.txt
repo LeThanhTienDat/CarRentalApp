@@ -83,3 +83,7 @@ C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\App.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Car\AddCarType.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Car\AddCategory.g.cs
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Car\AddCarType.baml
+C:\hoc lap trinh\DotNet\WPFAPP\CAR_RENTAL\obj\Debug\Views\Car\AddCategory.baml

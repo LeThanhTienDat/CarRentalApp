@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\views\\admin\\admin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\admin\\admin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\views\\admin\\admin.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\admin\\admin.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\views\\car\\caredit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\car\\caredit.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\views\\car\\car.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\views\\car\\car.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\car\\car.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|c:\\hoc lap trinh\\dotnet\\wpfapp\\car_rental\\model\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:model\\repositories\\carrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\views\\car\\car.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{12A7192A-E740-46E2-89A7-4F3DD7A089EE}|CAR_RENTAL.csproj|solutionrelative:views\\car\\car.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,104 +22,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginView.xaml",
-              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\LoginView.xaml",
-              "RelativeDocumentMoniker": "Views\\LoginView.xaml",
-              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\LoginView.xaml",
-              "RelativeToolTip": "Views\\LoginView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-09T05:34:31.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LoginView.xaml.cs",
-              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\LoginView.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\LoginView.xaml.cs",
-              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\LoginView.xaml.cs",
-              "RelativeToolTip": "Views\\LoginView.xaml.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAAAB0AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T05:27:23.693Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Admin.xaml.cs",
-              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Admin\\Admin.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\Admin\\Admin.xaml.cs",
-              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Admin\\Admin.xaml.cs",
-              "RelativeToolTip": "Views\\Admin\\Admin.xaml.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAHcAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T04:54:16.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CarEdit.xaml.cs",
-              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Car\\CarEdit.xaml.cs",
-              "RelativeDocumentMoniker": "Views\\Car\\CarEdit.xaml.cs",
-              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Car\\CarEdit.xaml.cs",
-              "RelativeToolTip": "Views\\Car\\CarEdit.xaml.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAgwJEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T04:50:35.527Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "Car.xaml.cs",
               "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Car\\Car.xaml.cs",
               "RelativeDocumentMoniker": "Views\\Car\\Car.xaml.cs",
               "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Car\\Car.xaml.cs",
               "RelativeToolTip": "Views\\Car\\Car.xaml.cs",
-              "ViewState": "AgIAAHgBAAAAAAAAAAAAAJgBAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAI8CAAAAAAAAAAAgwKQCAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T04:24:27.642Z",
+              "WhenOpened": "2025-08-10T04:19:43.73Z",
               "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "f84faec3-9145-44fb-9522-6ac314a3a59e",
-        "Display": 0,
-        "X": 80,
-        "Y": 144,
-        "Width": 1305,
-        "Height": 600,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Admin.xaml",
-              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Admin\\Admin.xaml",
-              "RelativeDocumentMoniker": "Views\\Admin\\Admin.xaml",
-              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Admin\\Admin.xaml",
-              "RelativeToolTip": "Views\\Admin\\Admin.xaml",
-              "ViewState": "AgIAADIAAAAAAAAAAAAYwEoAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "CarRepository.cs",
+              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Model\\Repositories\\CarRepository.cs",
+              "RelativeDocumentMoniker": "Model\\Repositories\\CarRepository.cs",
+              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Model\\Repositories\\CarRepository.cs",
+              "RelativeToolTip": "Model\\Repositories\\CarRepository.cs",
+              "ViewState": "AgIAAJQAAAAAAAAAAAAAAKMAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-10T10:38:24.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Car.xaml",
+              "DocumentMoniker": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Car\\Car.xaml",
+              "RelativeDocumentMoniker": "Views\\Car\\Car.xaml",
+              "ToolTip": "C:\\hoc lap trinh\\DotNet\\WPFAPP\\CAR_RENTAL\\Views\\Car\\Car.xaml",
+              "RelativeToolTip": "Views\\Car\\Car.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-09T05:29:59.76Z",
+              "WhenOpened": "2025-08-10T04:19:42.407Z",
               "EditorCaption": ""
             }
           ]

@@ -145,6 +145,12 @@
     <Compile Include="Views\Booking\ReasonCancel.xaml.cs">
       <DependentUpon>ReasonCancel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Car\AddCarType.xaml.cs">
+      <DependentUpon>AddCarType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Car\AddCategory.xaml.cs">
+      <DependentUpon>AddCategory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Car\Car.xaml.cs">
       <DependentUpon>Car.xaml</DependentUpon>
     </Compile>
@@ -228,6 +234,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Booking\ReasonCancel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Car\AddCarType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Car\AddCategory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

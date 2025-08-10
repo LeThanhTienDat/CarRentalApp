@@ -154,35 +154,55 @@ namespace CAR_RENTAL.Model.Repositories
         }
         public HashSet<CarView> GetAll()
         {
+            return new HashSet<CarView>();
+        }
+        public HashSet<CarView> GetAll (string brand = null, 
+                                        string model = null, 
+                                        string color = null, 
+                                        string licensePlate = null, 
+                                        int? seatCount = null,
+                                        string status = null,
+                                        string category = null,
+                                        string type = null,
+                                        decimal? price =null)
+        {
             try
             {
                 DbCarRental en = new DbCarRental();
                 var rs = (from car in en.tbl_Car
-                          join cate in en.tbl_Category on car.cate_id equals cate.cate_id
-                          join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
-                          join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
-                          from city in cityGroup.DefaultIfEmpty()
-                          join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
-                          from dis in disGroup.DefaultIfEmpty()
-                          orderby car.car_id descending
-                          select new CarView
-                          {
-                              ID = car.car_id,
-                              Brand = car.brand,
-                              Model = car.model,
-                              PricePerDay = car.price_per_day ?? 0,
-                              CarStatus = car.car_status,
-                              Image = car.image,
-                              LicensePlate = car.license_plate,
-                              SeatCount = car.seat_count ?? 0,
-                              Color = car.color,
-                              CarTypeId = car.car_type_id ?? 0,
-                              CategoryName = cate.title,
-                              CarTypeName = cartype.car_type_name,
-                              Active = car.active ?? 0
-                          }).ToHashSet();
-                
-                return rs;
+                           join cate in en.tbl_Category on car.cate_id equals cate.cate_id
+                           join cartype in en.tbl_Car_type on car.car_type_id equals cartype.car_type_id
+                           join city in en.tbl_City on car.city_id equals city.city_id into cityGroup
+                           from city in cityGroup.DefaultIfEmpty()
+                           join dis in en.tbl_District on car.district_id equals dis.district_id into disGroup
+                           from dis in disGroup.DefaultIfEmpty()
+                           orderby car.car_id descending
+                           select new CarView
+                           {
+                               ID = car.car_id,
+                               Brand = car.brand,
+                               Model = car.model,
+                               PricePerDay = car.price_per_day ?? 0,
+                               CarStatus = car.car_status,
+                               Image = car.image,
+                               LicensePlate = car.license_plate,
+                               SeatCount = car.seat_count ?? 0,
+                               Color = car.color,
+                               CarTypeId = car.car_type_id ?? 0,
+                               CategoryName = cate.title,
+                               CarTypeName = cartype.car_type_name,
+                               Active = car.active ?? 0
+                           });
+                if (!string.IsNullOrWhiteSpace(brand)) rs=rs.Where(x =>x.Brand.ToLower().Contains(brand.ToLower()));
+                if (!string.IsNullOrWhiteSpace(model)) rs=rs.Where(x=>x.Model.ToLower().Contains(model.ToLower()));
+                if (!string.IsNullOrWhiteSpace(color)) rs = rs.Where(x => x.Color.ToLower().Contains(color.ToLower()));
+                if (!string.IsNullOrWhiteSpace(licensePlate)) rs = rs.Where(x => x.LicensePlate.ToLower().Contains(licensePlate.ToLower()));
+                if (seatCount != null) rs = rs.Where(x => x.SeatCount == seatCount);
+                if (!string.IsNullOrWhiteSpace(status)) rs = rs.Where(x => x.CarStatus.ToLower().Contains(status.ToLower()));
+                if (!string.IsNullOrWhiteSpace(category)) rs = rs.Where(x => x.CategoryName.ToLower().Contains(category.ToLower()));
+                if (!string.IsNullOrWhiteSpace(type)) rs = rs.Where(x => x.CarTypeName.ToLower().Contains(type.ToLower()));
+                if (price != null) rs = rs.Where(x => x.PricePerDay >= (price.Value - 100000) && x.PricePerDay <= (price.Value + 100000));                           
+                return rs.ToHashSet();
             }
             catch (EntityException ex)
             {
@@ -347,6 +367,22 @@ namespace CAR_RENTAL.Model.Repositories
                     en.SaveChanges();
                     return true;
                 }
+            }
+            catch(EntityException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        public bool UpdateActive(CarView entity)
+        {
+            try
+            {
+                DbCarRental en = new DbCarRental();
+                var item = en.tbl_Car.Where(d => d.car_id == entity.ID).FirstOrDefault();
+                item.active = entity.Active;
+                en.SaveChanges();
+                return true;
             }
             catch(EntityException ex)
             {
